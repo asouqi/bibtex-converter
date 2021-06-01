@@ -1,0 +1,54 @@
+.format-button {
+    width: 220px;
+    height: 48px;
+    padding-left: 20px;
+}
+
+.PDF:hover {
+    cursor: pointer;
+    background: #F23030;
+    color: white;
+}
+
+.HTML:hover {
+    cursor: pointer;
+    background: #FFB700;
+    color: white;
+}
+
+.WORD:hover {
+    cursor: pointer;
+    background: #3D99F5;
+    color: white;
+}
+
+.XML:hover {
+    cursor: pointer;
+    background: #00CC44;
+    color: white;
+}
+
+.TXT:hover {
+    cursor: pointer;
+    background: #757575;
+    color: white;
+}
+
+.BIB:hover {
+    cursor: pointer;
+    background: #7961F2;
+    color: white;
+}
+
+.CIT:hover {
+    cursor: pointer;
+    background: #E667E6;
+    color: white;
+}
+
+.RIS:hover {
+    cursor: pointer;
+    background: #FF8000;
+    color: white;
+}
+

@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {NavBar} from './nav/NavBar'
+import {Citation} from "./component/Citation";
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="container py-4">
+          {/* Nav */}
+          <NavBar/>
+
+          {/* Body */}
+          <div className="p-5 mb-4 bg-light rounded-3">
+              <Citation format={'Json'} datatype={'json'}/>
+          </div>
+      </div>
     </div>
   );
 }

@@ -3,7 +3,7 @@ import Cite from "citation-js";
 import {ConvertToBibItem, ConvertToXML} from "../utilities/bib_converter";
 import {xmlFormatter} from "../utilities/xml_formatter";
 
-export default (input, format, style) => {
+const useCite =  (input, format, style) => {
     const [outputText, setOutputText] = useState(undefined)
     const [outputError, setOutputError] = useState(false)
     const [outputLoading, setOutputLoading] = useState(false)
@@ -38,8 +38,8 @@ export default (input, format, style) => {
             case 'HTML':
             case 'WORD': {
                 const cite = new Cite(input)
-                const output = cite.format((format === 'RIS' && 'ris' || format === 'CIT' && 'citation' || 'bibliography'), {
-                    format: format === 'TXT' && 'text' || 'html',
+                const output = cite.format(((format === 'RIS' && 'ris') || (format === 'CIT' && 'citation') || 'bibliography'), {
+                    format: (format === 'TXT' && 'text') || 'html',
                     template: style,
                     lang: 'en-US'
                 })
@@ -48,8 +48,12 @@ export default (input, format, style) => {
                     setOutputText(output)
                 break
             }
+            default: {
+                break
+            }
         }
         } catch (e) {
+            console.log(e)
             setOutputError(true)
             setOutputLoading(false)
         }
@@ -61,3 +65,5 @@ export default (input, format, style) => {
         outputText
     }
 }
+
+export default useCite

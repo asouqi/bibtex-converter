@@ -150,6 +150,7 @@ export const ConvertToXML = (bibtexs) => {
             const lastname = creatXMLNode('lastname', [])
             lastname.innerHTML = author['given']
             authors.appendChild(lastname)
+            return author
         })
         bibitem.appendChild(authors)
 
@@ -157,6 +158,7 @@ export const ConvertToXML = (bibtexs) => {
         bibitem.appendChild(year)
 
        bibliography.documentElement.appendChild(bibitem)
+       return bibtex
     })
 
     const xmlDoc = new XMLSerializer().serializeToString(bibliography.documentElement)

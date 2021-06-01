@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import Cite from "citation-js";
 import {ConvertToBibItem, ConvertToXML} from "../utilities/bib_converter";
+import {xmlFormatter} from "../utilities/xml_formatter";
 
 export default (input, format, style) => {
     const [outputText, setOutputText] = useState(undefined)
@@ -27,7 +28,7 @@ export default (input, format, style) => {
                 const xml = ConvertToXML(jsonBibtex)
                 setOutputLoading(false)
                 setOutputError(false)
-                setOutputText(xml)
+                setOutputText(xmlFormatter(xml))
                 break
             }
             case 'PDF':

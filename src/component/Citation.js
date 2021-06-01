@@ -138,7 +138,10 @@ export const Citation = (props) => {
               <div className="h-100 bg-light py-3">
                   <h6>Conversion Result</h6>
                   <div className="h-100 p-5 bg-light border rounded-3">
-                    <div className={'output-viewer'} dangerouslySetInnerHTML={{ __html: outputText }} />
+                      {(format === 'XML' || format === 'BIB' || format === 'RIS') &&
+                      <textarea readOnly style={{background: '#f8f9fa', width: '100%', height: '500px', resize: 'none', border: 'none'}} value={outputText}/> ||
+                      <div className={'output-viewer'} dangerouslySetInnerHTML={{ __html: outputText }} />
+                      }
                   </div>
               </div>
               </div>

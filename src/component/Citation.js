@@ -49,7 +49,7 @@ export const Citation = (props) => {
   },[])
 
   const onDownloadClickHandler = useCallback((event) => {
-      if (format){
+      if (format && innerText.length > 1 && !outputError){
           if (format === 'PDF'){
               const element = document.getElementsByClassName('output-viewer')[0].cloneNode(true);
               element.style.width = '648px';
@@ -74,11 +74,22 @@ export const Citation = (props) => {
               link.click();
           }
       }
-  },[format, outputText, fileName])
+  },[format, outputText, fileName, innerText, outputError])
 
   const handleOnStyleClick = useCallback((event) => setStyle(event.target.id),[])
 
   const onFileNameChange = useCallback((event) => setFileName(event.target.value), [setFileName])
+
+  const onClipboardClick = useCallback((event) => {
+      if (outputText && outputText.length > 1 && !outputError) {
+          const toast = document.getElementById("snackbar");
+          toast.className = "show";
+          (async () =>{ await navigator.clipboard.writeText(outputText)})()
+          setTimeout(function(){
+              toast.className = toast.className.replace("show", "");
+          }, 3000);
+      }
+  },[outputText, outputError])
 
   return(
       <div className="container-fluid py-5">
@@ -108,7 +119,9 @@ export const Citation = (props) => {
           {/* Conversion Control */}
          <ConversionControls onDownloadClickHandler={onDownloadClickHandler}
                              onClearClickHandler={onClearClickHandler}
-                             onFileNameChange={onFileNameChange}/>
+                             onFileNameChange={onFileNameChange}
+                             onClipboardClick={onClipboardClick}
+         />
 
           {/*  Output Viewer  */}
           {outputLoading && (
@@ -135,7 +148,7 @@ export const Citation = (props) => {
                           <label className="btn btn-outline-primary" htmlFor="ieee">ieee</label>
                       </div>
                   </div>
-              <div className="h-100 bg-light py-3">
+              <div className="h-100 bg-light py-4">
                   <h6>Conversion Result</h6>
                   <div className="h-100 p-5 bg-light border rounded-3">
                       {(format === 'XML' || format === 'BIB' || format === 'RIS') &&

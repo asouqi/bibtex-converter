@@ -7,7 +7,7 @@ export const FormatGroup = ({setFormat}) => {
     return(
         <div className={'container-fluid py-5'}>
             <div className="mb-1 text-muted">Convert form BibTex:</div>
-            <div className="btn-group d-flex justify-content-between" role="group" aria-label="Basic radio toggle button group" style={{marginBottom: '10px'}}>
+            <div className="btn-group d-flex flex-wrap justify-content-between" role="group" aria-label="Basic radio toggle button group" style={{marginBottom: '10px'}}>
                 <input type="radio" className="btn-check" name="btnradio" id="PDF" autoComplete="off"
                        onClick={onGroupButtonClick}/>
                 <FormatButton format={'PDF'}/>

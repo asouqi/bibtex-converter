@@ -87,6 +87,7 @@ export const ConvertToBibItem = (bibtex) => {
             if (note.length > 0) {
                 bibitem+= `, ${note}`
             }
+            bibitem+= '\n'
         }
     }
     return bibitem

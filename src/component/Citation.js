@@ -55,6 +55,11 @@ export const Citation = (props) => {
               element.style.width = '648px';
               element.style.padding = '12px';
 
+              const style = `.csl-bib-body div:nth-child(10n){ margin-bottom: 300px; }`
+              const styleSheet = document.createElement('style')
+              styleSheet.innerText = style
+              element.appendChild(styleSheet)
+
               const doc = new jsPDF('p', 'px', 'a4')
               doc.html(element, {
                   callback: function (doc) {
@@ -69,7 +74,17 @@ export const Citation = (props) => {
               })
           } else {
               const link = document.createElement('a');
-              link.href = `data:${FormatEncoder[format].fileType};charset=UTF-8,` + encodeURIComponent(outputText);
+              if (format === 'WORD'){
+                  const header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' "+
+                      "xmlns:w='urn:schemas-microsoft-com:office:word' "+
+                      "xmlns='http://www.w3.org/TR/REC-html40'>"+
+                      "<head><meta charset='utf-8'></head><body>";
+                  const footer = "</body></html>";
+                  const source = header + outputText + footer
+                  link.href = `data:${FormatEncoder[format].fileType};charset=UTF-8,` + encodeURIComponent(source)
+              } else {
+                  link.href = `data:${FormatEncoder[format].fileType};charset=UTF-8,` + encodeURIComponent(outputText);
+              }
               link.download = `${fileName}.${FormatEncoder[format].name}`;
               link.click();
           }

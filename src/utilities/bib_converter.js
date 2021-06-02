@@ -15,7 +15,7 @@ export const ConvertToBibItem = (bibtex) => {
             while (i < rows.length && !rows[i].includes('@')) {
                 const line = rows[i].trim()
                 if (line.startsWith('title')){
-                    title = line.substring(line.indexOf('{') + 1, line.indexOf('}') + 1)
+                    title = line.substring(line.indexOf('{') + 1, line.indexOf('}'))
                 } else if(line.startsWith('journal')) {
                     venue = line.substring(line.indexOf('{') + 1, line.indexOf('}'))
                 }
@@ -40,7 +40,7 @@ export const ConvertToBibItem = (bibtex) => {
                 else if(line.startsWith('note')) {
                     note = line.substring(line.indexOf('{') + 1, line.indexOf('}'))
                 }
-                else if(line.startsWith('author')) {
+                else if(line.startsWith('author') || line.startsWith('editor')) {
                     authors = line.substring(line.indexOf('{') + 1, line.indexOf('}'))
                     // eslint-disable-next-line array-callback-return,no-loop-func
                     authors.split('and').map((LastFirst) => {
@@ -54,6 +54,17 @@ export const ConvertToBibItem = (bibtex) => {
                 }
                 i+= 1
             }
+
+            title = title.trim()
+            venue = venue.trim()
+            volume = volume.trim()
+            number = number.trim()
+            pages = pages.trim()
+            year = year.trim()
+            publisher = publisher.trim()
+            howpublished = howpublished.trim()
+            note = note.trim()
+            authors = authors.trim()
 
             bibitem+= `\\bibitem{${code}}`
 
@@ -75,13 +86,13 @@ export const ConvertToBibItem = (bibtex) => {
                    bibitem+= ` (${year})`
                }
             }
-            if (publisher.length > 0 && venue.length < 0){
+            if (publisher.length > 0 && venue.length < 1){
                 bibitem+= `(${publisher},${year})`
             }
-            if (year.length > 0 && publisher.length < 0 && venue.length < 0){
+            if (year.length > 0 && publisher.length < 1 && venue.length < 1){
                 bibitem+= ` (${year})`
             }
-            if (howpublished.length > 0){
+            if (howpublished.length > 1){
                 bibitem+= `, ${howpublished}`
             }
             if (note.length > 0) {
@@ -106,34 +117,41 @@ export const ConvertToXML = (bibtexs) => {
     }
 
     bibtexs.map((bibtex) => {
-        const {type, id, title, author, issued } = bibtex
+        const setValueIfExist = (key, nodeName, object = bibtex, parent = bibitem) => {
+            if (object[key]){
+                const node = creatXMLNode(nodeName, [])
+                node.innerHTML = object[key].toString()
+                parent.appendChild(node)
+            }
+        }
+
+        const {type, id, title, author, editor, issued } = bibtex
 
         const bibitem = creatXMLNode('bibitem', [{name: 'type', value: type}])
         const label = creatXMLNode('label', [])
-        const authors = creatXMLNode('author', [])
+        const authors = creatXMLNode('authors', [])
         const bibTitle = creatXMLNode('title', [])
         const year = creatXMLNode('year', [])
 
-        if (type === 'book'){
-            const publisher = creatXMLNode('publisher', []) //publisher
-            publisher.innerHTML = bibtex['publisher']
-            bibitem.appendChild(publisher)
+        // BOOK
+        setValueIfExist('collection-title', 'series')
+        setValueIfExist('publisher', 'publisher')
+        setValueIfExist('publisher-place', 'address')
+        setValueIfExist('edition', 'edition')
 
-            const address = creatXMLNode('address', []) //publisher-place
-            address.innerHTML = bibtex['publisher-place']
-            bibitem.appendChild(address)
+        if (type === 'paper-conference' || type === 'chapter'){
+            setValueIfExist('container-title','booktitle')
         } else {
-            const journal = creatXMLNode('journal', [])
-            journal.innerHTML = bibtex['container-title']
-            bibitem.appendChild(journal)
+            setValueIfExist('container-title','journal')
+        }
+        setValueIfExist('volume','volume')
+        setValueIfExist('issue','number')
 
-            const bibVolume = creatXMLNode('volume', [])
-            bibVolume.innerHTML = bibtex.volume
-            bibitem.appendChild(bibVolume)
+        setValueIfExist('page','pages')
+        setValueIfExist('language','language')
 
-            const bibPages = creatXMLNode('pages', [])
-            bibPages.innerHTML = bibtex['page']
-            bibitem.appendChild(bibPages)
+        if (type === 'chapter'){
+            setValueIfExist('chapter-number','chapter')
         }
 
         label.innerHTML = id
@@ -142,20 +160,33 @@ export const ConvertToXML = (bibtexs) => {
         bibTitle.innerHTML = title
         bibitem.appendChild(bibTitle)
 
-        author.map((author) => {
-            const firstname = creatXMLNode('firstname', [])
-            firstname.innerHTML = author.family
-            authors.appendChild(firstname)
-
-            const lastname = creatXMLNode('lastname', [])
-            lastname.innerHTML = author['given']
-            authors.appendChild(lastname)
+        if (author){
+          author.map((auth) => {
+            const nodeAuthor = creatXMLNode('author', [])
+            setValueIfExist('family','firstname', auth, nodeAuthor)
+            setValueIfExist('given','lastname', auth, nodeAuthor)
+            authors.appendChild(nodeAuthor)
             return author
-        })
-        bibitem.appendChild(authors)
+          })
+          bibitem.appendChild(authors)
+        }
+
+        if (editor){
+            const editors = creatXMLNode('editors', [])
+            editor.map((edit) => {
+                const nodeEditor = creatXMLNode('editor', [])
+                setValueIfExist('family','firstname', edit, nodeEditor)
+                setValueIfExist('given','lastname', edit, nodeEditor)
+                editors.appendChild(nodeEditor)
+                return editor
+            })
+            bibitem.appendChild(editors)
+        }
 
         year.innerHTML = issued['date-parts'].toString()
         bibitem.appendChild(year)
+
+        setValueIfExist('note', 'note')
 
        bibliography.documentElement.appendChild(bibitem)
        return bibtex

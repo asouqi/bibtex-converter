@@ -130,7 +130,7 @@ export const Citation = (props) => {
               </div>
           )}
           {outputError && (<span className="badge bg-danger">sorry we are unable to convert your input ⚠️</span>)}
-          {outputText && outputText.length > 1 && (
+          {outputText && outputText.length > 1 && !outputError && (
               <div>
                   <div className="h-100 bg-light">
                       <h6>Citation Style/Templates</h6>

@@ -69,7 +69,7 @@ export const Citation = (props) => {
               })
           } else {
               const link = document.createElement('a');
-              link.href = `data:${FormatEncoder[format].fileType};charset=UTF-8,` + escape(outputText);
+              link.href = `data:${FormatEncoder[format].fileType};charset=UTF-8,` + encodeURIComponent(outputText);
               link.download = `${fileName}.${FormatEncoder[format].name}`;
               link.click();
           }

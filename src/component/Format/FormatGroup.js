@@ -11,7 +11,7 @@ export const FormatGroup = ({setFormat, format}) => {
             </h4>
 
             {!format && <h6 className="mb-2 alata-font">please select one of the following formats for conversion:</h6>}
-            <div className="btn-group d-flex flex-wrap justify-content-between" role="group" aria-label="Basic radio toggle button group" style={{marginBottom: '10px'}}>
+            <div className="btn-group d-flex flex-wrap justify-content-between" role="group" aria-label="converted formats" style={{marginBottom: '10px'}}>
                 <input type="radio" className="btn-check" name="btnradio" id="PDF" autoComplete="off"
                        onClick={onGroupButtonClick}/>
                 <FormatButton format={'PDF'}/>

@@ -54,6 +54,7 @@ const useCite =  (input, format, style) => {
             }
         }
         } catch (e) {
+            setOutputText('')
             setOutputError(true)
             setOutputLoading(false)
         }

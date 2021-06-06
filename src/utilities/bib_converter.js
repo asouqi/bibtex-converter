@@ -15,33 +15,33 @@ export const ConvertToBibItem = (bibtex) => {
             while (i < rows.length && !rows[i].includes('@')) {
                 const line = rows[i].trim()
                 if (line.startsWith('title')){
-                    title = line.substring(line.indexOf('{') + 1, line.indexOf('}'))
+                    title = line.substring(line.indexOf('{') + 1, line.lastIndexOf('}'))
                 } else if(line.startsWith('journal')) {
-                    venue = line.substring(line.indexOf('{') + 1, line.indexOf('}'))
+                    venue = line.substring(line.indexOf('{') + 1, line.lastIndexOf('}'))
                 }
                 else if(line.startsWith('volume')) {
-                    volume = line.substring(line.indexOf('{') + 1, line.indexOf('}'))
+                    volume = line.substring(line.indexOf('{') + 1, line.lastIndexOf('}'))
                 }
                 else if(line.startsWith('number')) {
-                    number = line.substring(line.indexOf('{') + 1, line.indexOf('}'))
+                    number = line.substring(line.indexOf('{') + 1, line.lastIndexOf('}'))
                 }
                 else if(line.startsWith('pages')) {
-                    pages = line.substring(line.indexOf('{') + 1, line.indexOf('}'))
+                    pages = line.substring(line.indexOf('{') + 1, line.lastIndexOf('}'))
                 }
                 else if(line.startsWith('year')) {
-                    year = line.substring(line.indexOf('{') + 1, line.indexOf('}'))
+                    year = line.substring(line.indexOf('{') + 1, line.lastIndexOf('}'))
                 }
                 else if(line.startsWith('publisher')) {
-                    publisher = line.substring(line.indexOf('{') + 1, line.indexOf('}'))
+                    publisher = line.substring(line.indexOf('{') + 1, line.lastIndexOf('}'))
                 }
                 else if(line.startsWith('howpublished')) {
-                    howpublished = line.substring(line.indexOf('{') + 1, line.indexOf('}'))
+                    howpublished = line.substring(line.indexOf('{') + 1, line.lastIndexOf('}'))
                 }
                 else if(line.startsWith('note')) {
-                    note = line.substring(line.indexOf('{') + 1, line.indexOf('}'))
+                    note = line.substring(line.indexOf('{') + 1, line.lastIndexOf('}'))
                 }
                 else if(line.startsWith('author') || line.startsWith('editor')) {
-                    authors = line.substring(line.indexOf('{') + 1, line.indexOf('}'))
+                    authors = line.substring(line.indexOf('{') + 1, line.lastIndexOf('}'))
                     // eslint-disable-next-line array-callback-return,no-loop-func
                     authors.split('and').map((LastFirst) => {
                         const lf = LastFirst.replace(/ /g, '').split(',')
@@ -120,7 +120,7 @@ export const ConvertToXML = (bibtexs) => {
         const setValueIfExist = (key, nodeName, object = bibtex, parent = bibitem) => {
             if (object[key]){
                 const node = creatXMLNode(nodeName, [])
-                node.innerHTML = object[key].toString()
+                node.innerHTML = encodeXML(object[key].toString())
                 parent.appendChild(node)
             }
         }
@@ -194,4 +194,10 @@ export const ConvertToXML = (bibtexs) => {
 
     const xmlDoc = new XMLSerializer().serializeToString(bibliography.documentElement)
     return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + xmlDoc
+}
+
+const encodeXML = (data) => {
+    const node = document.createElement('div');
+    node.appendChild(document.createTextNode(data));
+    return node.innerHTML;
 }

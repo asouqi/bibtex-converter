@@ -21,31 +21,43 @@ export const Citation = (props) => {
 
   const {outputText, outputError, outputLoading} = UseCite(innerText,format, style)
 
-  const onTextChangeHandler = useCallback((event) => setInnerText(event.target.innerText), [])
+  const onTextChangeHandler = useCallback((event) => {
+      if (uploadProgress !== 0 || uploadError){
+          setUploadProgress(0)
+          setUploadError(false)
+      }
+      setInnerText(event.target.value)
+  }, [uploadProgress, uploadError])
 
   const onClearClickHandler = useCallback(() => {
-      editorRef.current.innerText = ''
+      editorRef.current.value = ''
       uploadRef.current.value = null
       setInnerText('')
       setUploadProgress(0)
       setUploadError(false)
+      setFormat(undefined)
   },[])
 
   const onFileUpload = useCallback((event) => {
-      const file = event.target.files[0]
-      // eslint-disable-next-line no-undef
-      const fileReader = new FileReader()
+      try {
+          //Clear text
+          editorRef.current.value = ''
+          setInnerText('')
 
-      fileReader.onload = () => {
-          editorRef.current.innerText = ''
-          setInnerText(fileReader.result)
+          const file = event.target.files[0]
+          // eslint-disable-next-line no-undef
+          const fileReader = new FileReader()
+
+          fileReader.onloadend = () => setInnerText(fileReader.result)
+
+          fileReader.onprogress = (e) => setUploadProgress(Math.round((e.loaded * 100) / e.total))
+
+          fileReader.onerror = () => setUploadError(true)
+
+          fileReader.readAsText(file)
+      } catch (e) {
+          setUploadError(true)
       }
-
-      fileReader.onprogress = (e) => setUploadProgress(Math.round((e.loaded * 100) / e.total))
-
-      fileReader.onerror = () => setUploadError(true)
-
-      fileReader.readAsText(file)
   },[])
 
   const onDownloadClickHandler = useCallback((event) => {
@@ -107,17 +119,20 @@ export const Citation = (props) => {
   },[outputText, outputError])
 
   return(
-      <div className="container-fluid py-5">
+      <div className="container-fluid">
           <FormatGroup format={format} setFormat={setFormat}/>
 
-          {format && <FormatLabel format={format}/>}
+          {/* Text editor */}
+          <div className="mb-3 py-3">
+              {format && <FormatLabel format={format}/>}
 
-          <TextEditor editorRef={editorRef} format={format} onTextChangeHandler={onTextChangeHandler}/>
+              <TextEditor editorRef={editorRef} format={format} onTextChangeHandler={onTextChangeHandler}/>
+          </div>
 
           {/* Upload Handler */}
           <div className="mb-3 py-3">
-              {format && <label htmlFor="formFile" className="form-label">You could also upload .bib or .json file for converting to {FormatEncoder[format].text}:</label>}
-              <input ref={uploadRef} className="form-control" type="file" id="formFile" onChange={onFileUpload}/>
+              {format && <FormatLabel format={format} uploadMessage={true}/>}
+              <input ref={uploadRef} className="form-control" type="file" id="formFile" accept={'.bib, .json'} onChange={onFileUpload}/>
               {uploadProgress > 0 && uploadProgress < 100 && (
                   <div className="progress" style={{marginTop: '10px'}}>
                       <div className="progress-bar" role="progressbar" style={{width: `${uploadProgress}%`}} aria-valuenow="25"
@@ -128,7 +143,7 @@ export const Citation = (props) => {
               {uploadProgress === 100 && (
                   <span className="badge bg-success" style={{marginTop: '10px'}}>Uploaded</span>
               )}
-              {uploadError && (<span className="badge bg-danger">Unable to upload your file</span>)}
+              {uploadError && (<span className="badge bg-danger" style={{marginTop: '25px'}}>Unable to upload your file ⚠</span>)}
           </div>
 
           {/* Conversion Control */}
@@ -144,10 +159,9 @@ export const Citation = (props) => {
                   <span className="visually-hidden">Loading...</span>
               </div>
           )}
-          {outputError && (<span className="badge bg-danger">sorry we are unable to convert your input ⚠️</span>)}
-          {outputText && outputText.length > 1 && !outputError && (
-              <div>
-                  <div className="h-100 bg-light">
+          {outputError && (<span className="mb-2 badge bg-danger">sorry we are unable to convert your input ⚠️</span>)}
+          <div>
+              <div className="h-100 bg-light">
                       <h6>Citation Style/Templates</h6>
                       <div className="btn-group" role="group" aria-label="Basic checkbox toggle button group">
                           <input checked={style === 'apa'} type="checkbox" className="btn-check" id="apa" autoComplete="off"
@@ -162,7 +176,7 @@ export const Citation = (props) => {
                                  onClick={handleOnStyleClick}/>
                           <label className="btn btn-outline-primary" htmlFor="ieee">ieee</label>
                       </div>
-                  </div>
+              </div>
               <div className="h-100 bg-light py-4">
                   <h6>Conversion Result</h6>
                   <div className="h-100 p-5 bg-light border rounded-3">
@@ -172,8 +186,7 @@ export const Citation = (props) => {
                       }
                   </div>
               </div>
-              </div>
-          )}
+          </div>
       </div>
   )
 }

@@ -1,7 +1,8 @@
 import React from "react";
 import {NavBar} from './nav/NavBar'
 import {Citation} from "./component/Citation";
-
+import './fonts/Alata-Regular.ttf';
+import './fonts.css'
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
           <NavBar/>
 
           {/* Body */}
-          <div className="p-5 mb-4 bg-light rounded-3">
+          <div className="p-3 mb-4 bg-light rounded-3">
               <Citation format={'Json'} datatype={'json'}/>
           </div>
       </div>

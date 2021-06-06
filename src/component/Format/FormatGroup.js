@@ -1,12 +1,16 @@
 import React, {useCallback} from "react";
 import {FormatButton} from "./FormatButton";
 
-export const FormatGroup = ({setFormat}) => {
+export const FormatGroup = ({setFormat, format}) => {
     const onGroupButtonClick = useCallback((event) => setFormat(event.target.id),[setFormat])
 
     return(
-        <div className={'container-fluid py-5'}>
-            <div className="mb-1 text-muted">Convert form BibTex:</div>
+        <div className={'container-fluid py-1'}>
+            <h4 className="mb-5 text-body alata-font">
+                Convert your Bibtex bibliography text or file instantly.
+            </h4>
+
+            {!format && <h6 className="mb-2 alata-font">please select one of the following formats for conversion:</h6>}
             <div className="btn-group d-flex flex-wrap justify-content-between" role="group" aria-label="Basic radio toggle button group" style={{marginBottom: '10px'}}>
                 <input type="radio" className="btn-check" name="btnradio" id="PDF" autoComplete="off"
                        onClick={onGroupButtonClick}/>

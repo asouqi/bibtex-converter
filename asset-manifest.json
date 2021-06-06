@@ -1,29 +1,30 @@
 {
   "files": {
-    "main.css": "/bibtex-converter/static/css/main.89d0e2ee.chunk.css",
-    "main.js": "/bibtex-converter/static/js/main.a16847ac.chunk.js",
-    "main.js.map": "/bibtex-converter/static/js/main.a16847ac.chunk.js.map",
-    "runtime-main.js": "/bibtex-converter/static/js/runtime-main.ff6325ad.js",
-    "runtime-main.js.map": "/bibtex-converter/static/js/runtime-main.ff6325ad.js.map",
-    "static/js/2.588179b1.chunk.js": "/bibtex-converter/static/js/2.588179b1.chunk.js",
-    "static/js/2.588179b1.chunk.js.map": "/bibtex-converter/static/js/2.588179b1.chunk.js.map",
-    "static/js/3.44e40542.chunk.js": "/bibtex-converter/static/js/3.44e40542.chunk.js",
-    "static/js/3.44e40542.chunk.js.map": "/bibtex-converter/static/js/3.44e40542.chunk.js.map",
-    "static/js/4.b04e3d0e.chunk.js": "/bibtex-converter/static/js/4.b04e3d0e.chunk.js",
-    "static/js/4.b04e3d0e.chunk.js.map": "/bibtex-converter/static/js/4.b04e3d0e.chunk.js.map",
-    "static/js/5.faecfa80.chunk.js": "/bibtex-converter/static/js/5.faecfa80.chunk.js",
-    "static/js/5.faecfa80.chunk.js.map": "/bibtex-converter/static/js/5.faecfa80.chunk.js.map",
+    "main.css": "/bibtex-converter/static/css/main.a86bf122.chunk.css",
+    "main.js": "/bibtex-converter/static/js/main.b7bc718c.chunk.js",
+    "main.js.map": "/bibtex-converter/static/js/main.b7bc718c.chunk.js.map",
+    "runtime-main.js": "/bibtex-converter/static/js/runtime-main.03d0d831.js",
+    "runtime-main.js.map": "/bibtex-converter/static/js/runtime-main.03d0d831.js.map",
+    "static/js/2.512423f6.chunk.js": "/bibtex-converter/static/js/2.512423f6.chunk.js",
+    "static/js/2.512423f6.chunk.js.map": "/bibtex-converter/static/js/2.512423f6.chunk.js.map",
+    "static/js/3.cc4f0114.chunk.js": "/bibtex-converter/static/js/3.cc4f0114.chunk.js",
+    "static/js/3.cc4f0114.chunk.js.map": "/bibtex-converter/static/js/3.cc4f0114.chunk.js.map",
+    "static/js/4.42b2ee70.chunk.js": "/bibtex-converter/static/js/4.42b2ee70.chunk.js",
+    "static/js/4.42b2ee70.chunk.js.map": "/bibtex-converter/static/js/4.42b2ee70.chunk.js.map",
+    "static/js/5.fc24dd3a.chunk.js": "/bibtex-converter/static/js/5.fc24dd3a.chunk.js",
+    "static/js/5.fc24dd3a.chunk.js.map": "/bibtex-converter/static/js/5.fc24dd3a.chunk.js.map",
     "index.html": "/bibtex-converter/index.html",
-    "static/css/main.89d0e2ee.chunk.css.map": "/bibtex-converter/static/css/main.89d0e2ee.chunk.css.map",
-    "static/js/2.588179b1.chunk.js.LICENSE.txt": "/bibtex-converter/static/js/2.588179b1.chunk.js.LICENSE.txt",
-    "static/js/3.44e40542.chunk.js.LICENSE.txt": "/bibtex-converter/static/js/3.44e40542.chunk.js.LICENSE.txt",
-    "static/js/4.b04e3d0e.chunk.js.LICENSE.txt": "/bibtex-converter/static/js/4.b04e3d0e.chunk.js.LICENSE.txt",
-    "static/js/5.faecfa80.chunk.js.LICENSE.txt": "/bibtex-converter/static/js/5.faecfa80.chunk.js.LICENSE.txt"
+    "static/css/main.a86bf122.chunk.css.map": "/bibtex-converter/static/css/main.a86bf122.chunk.css.map",
+    "static/js/2.512423f6.chunk.js.LICENSE.txt": "/bibtex-converter/static/js/2.512423f6.chunk.js.LICENSE.txt",
+    "static/js/3.cc4f0114.chunk.js.LICENSE.txt": "/bibtex-converter/static/js/3.cc4f0114.chunk.js.LICENSE.txt",
+    "static/js/4.42b2ee70.chunk.js.LICENSE.txt": "/bibtex-converter/static/js/4.42b2ee70.chunk.js.LICENSE.txt",
+    "static/js/5.fc24dd3a.chunk.js.LICENSE.txt": "/bibtex-converter/static/js/5.fc24dd3a.chunk.js.LICENSE.txt",
+    "static/media/fonts.css": "/bibtex-converter/static/media/Alata-Regular.e834207e.ttf"
   },
   "entrypoints": [
-    "static/js/runtime-main.ff6325ad.js",
-    "static/js/3.44e40542.chunk.js",
-    "static/css/main.89d0e2ee.chunk.css",
-    "static/js/main.a16847ac.chunk.js"
+    "static/js/runtime-main.03d0d831.js",
+    "static/js/3.cc4f0114.chunk.js",
+    "static/css/main.a86bf122.chunk.css",
+    "static/js/main.b7bc718c.chunk.js"
   ]
 }

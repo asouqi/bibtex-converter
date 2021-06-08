@@ -1,6 +1,7 @@
 import React from "react";
 import {NavBar} from './nav/NavBar'
 import {Citation} from "./component/Citation";
+import 'bootstrap/scss/bootstrap.scss'
 import './fonts/Alata-Regular.ttf';
 import './fonts.css'
 
@@ -47,6 +48,8 @@ function App() {
                       </ul>
                   </div>
           </footer>
+
+          <link rel="canonical" href={"https://asouqi.github.io/bibtex-converter"}/>
       </div>
     </div>
   );

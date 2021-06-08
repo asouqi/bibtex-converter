@@ -3,7 +3,7 @@ import Cite from "citation-js";
 import {ConvertToBibItem, ConvertToXML} from "../utilities/bib_converter";
 import {xmlFormatter} from "../utilities/xml_formatter";
 
-const useCite =  (input, format, style) => {
+export default (input, format, style) => {
     const [outputText, setOutputText] = useState(undefined)
     const [outputError, setOutputError] = useState(false)
     const [outputLoading, setOutputLoading] = useState(false)
@@ -71,5 +71,3 @@ const useCite =  (input, format, style) => {
         outputText
     }
 }
-
-export default useCite

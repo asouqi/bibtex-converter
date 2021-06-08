@@ -1,8 +1,10 @@
 {
-  "app.js": "autoapp.js",
-  "120.js": "auto120.js",
-  "856.js": "auto856.js",
-  "513.js": "auto513.js",
+  "app.js": "autoapp.bundle.js",
+  "jsPDF.js": "autojsPDF.bundle.js",
+  "citation-js.js": "autocitation-js.bundle.js",
+  "120.bundle.js": "auto120.bundle.js",
+  "856.bundle.js": "auto856.bundle.js",
+  "513.bundle.js": "auto513.bundle.js",
   "Alata-Regular.ttf": "autoe834207edf981b875022.ttf",
   "favicon.ico": "autofavicon.ico",
   "index.html": "autoindex.html"

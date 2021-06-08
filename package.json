@@ -4,21 +4,17 @@
   "private": true,
   "homepage": "https://asouqi.github.io/bibtex-converter",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
     "bootstrap": "^5.0.1",
     "citation-js": "^0.5.1",
-    "html2pdf.js": "^0.9.3",
     "jspdf": "^2.3.1",
+    "node-sass": "^6.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-    "web-vitals": "^1.0.1"
+    "react-scripts": "4.0.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "webpack serve --open --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
@@ -43,6 +39,26 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^3.2.0"
+    "@babel/core": "^7.14.3",
+    "@babel/preset-env": "^7.14.4",
+    "@babel/preset-react": "^7.13.13",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.6",
+    "file-loader": "^6.2.0",
+    "gh-pages": "^3.2.0",
+    "html-webpack-plugin": "^5.3.1",
+    "json-loader": "^0.5.7",
+    "path": "^0.12.7",
+    "sass-loader": "^12.0.0",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-manifest-plugin": "^3.1.1",
+    "webpack-merge": "^5.7.3"
   }
 }

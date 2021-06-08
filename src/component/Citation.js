@@ -8,7 +8,7 @@ import {FormatLabel} from "./Format/FormatLabel";
 import {FormatEncoder} from "./Format/FormatEncoder";
 import {ConversionControls} from "./ConversionControls";
 
-export const Citation = (props) => {
+export const Citation = () => {
   const editorRef = useRef()
   const uploadRef = useRef()
 

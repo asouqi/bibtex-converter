@@ -2,7 +2,6 @@ import React, { useCallback, useRef, useState} from "react";
 import {FormatGroup} from "./Format/FormatGroup";
 import {TextEditor} from "./TextEditor";
 import UseCite from '../hooks/cite'
-import {jsPDF} from "jspdf";
 
 import {FormatLabel} from "./Format/FormatLabel";
 import {FormatEncoder} from "./Format/FormatEncoder";
@@ -60,7 +59,7 @@ export const Citation = () => {
       }
   },[])
 
-  const onDownloadClickHandler = useCallback((event) => {
+  const onDownloadClickHandler = useCallback(async (event) => {
       if (format && innerText.length > 1 && !outputError){
           if (format === 'PDF'){
               const element = document.getElementsByClassName('output-viewer')[0].cloneNode(true);
@@ -72,6 +71,7 @@ export const Citation = () => {
               styleSheet.innerText = style
               element.appendChild(styleSheet)
 
+              const {jsPDF} = await import(/* webpackChunkName: "jsPDF" */'jspdf');
               const doc = new jsPDF('p', 'px', 'a4')
               doc.html(element, {
                   callback: function (doc) {

@@ -1,15 +1,9 @@
 {
-  "short_name": "Bibtex Converter",
-  "name": "Online Bibtex Converter",
-  "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "app.js": "autoapp.js",
+  "120.js": "auto120.js",
+  "856.js": "auto856.js",
+  "513.js": "auto513.js",
+  "Alata-Regular.ttf": "autoe834207edf981b875022.ttf",
+  "favicon.ico": "autofavicon.ico",
+  "index.html": "autoindex.html"
 }

@@ -23,7 +23,8 @@ export default (input, format, style) => {
             try {
                 switch (format){
                     case 'BIB': {
-                        const bibitem = ConvertToBibItem(cite.format('bibtex'))
+                        const jsonBibtex = JSON.parse(cite.format('data'))
+                        const bibitem = ConvertToBibItem(jsonBibtex)
                         setOutputLoading(false)
                         setOutputError(false)
                         setOutputText(bibitem)
@@ -62,7 +63,11 @@ export default (input, format, style) => {
                 setOutputError(true)
                 setOutputLoading(false)
             }
-        })();
+        })().catch(() => {
+            setOutputText('')
+            setOutputError(true)
+            setOutputLoading(false)
+        });
     } else {
             setOutputText('')
             setOutputLoading(false)

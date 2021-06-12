@@ -1,106 +1,63 @@
-export const ConvertToBibItem = (bibtex) => {
+export const ConvertToBibItem = (bibtexs) => {
     let bibitem = ''
-    const rows = bibtex.split('\n')
-    let i = 0
-    while (i < rows.length){
-        const line = rows[i].trim()
-        if (line.length <= 0) {
-            i+= 1
+
+    const getAuthors = (authors) => authors.map(author => {
+        const {family, given} = author
+        if (family && given){
+            return `${capitalize(family)}, ${given.charAt(0).toUpperCase()}.`
         }
-        if ('@' === line[0]){
-            const code = line.substring(line.indexOf('{') + 1, line.length -1 )
-            let title = '', venue = '',  volume = '', number = '', pages = '', year = '', publisher = '', howpublished = '', note = '', authors = ''
-            const output_authors = []
-            i += 1
-            while (i < rows.length && !rows[i].includes('@')) {
-                const line = rows[i].trim()
-                if (line.startsWith('title')){
-                    title = line.substring(line.indexOf('{') + 1, line.lastIndexOf('}'))
-                } else if(line.startsWith('journal')) {
-                    venue = line.substring(line.indexOf('{') + 1, line.lastIndexOf('}'))
-                }
-                else if(line.startsWith('volume')) {
-                    volume = line.substring(line.indexOf('{') + 1, line.lastIndexOf('}'))
-                }
-                else if(line.startsWith('number')) {
-                    number = line.substring(line.indexOf('{') + 1, line.lastIndexOf('}'))
-                }
-                else if(line.startsWith('pages')) {
-                    pages = line.substring(line.indexOf('{') + 1, line.lastIndexOf('}'))
-                }
-                else if(line.startsWith('year')) {
-                    year = line.substring(line.indexOf('{') + 1, line.lastIndexOf('}'))
-                }
-                else if(line.startsWith('publisher')) {
-                    publisher = line.substring(line.indexOf('{') + 1, line.lastIndexOf('}'))
-                }
-                else if(line.startsWith('howpublished')) {
-                    howpublished = line.substring(line.indexOf('{') + 1, line.lastIndexOf('}'))
-                }
-                else if(line.startsWith('note')) {
-                    note = line.substring(line.indexOf('{') + 1, line.lastIndexOf('}'))
-                }
-                else if(line.startsWith('author') || line.startsWith('editor')) {
-                    authors = line.substring(line.indexOf('{') + 1, line.lastIndexOf('}'))
-                    // eslint-disable-next-line array-callback-return,no-loop-func
-                    authors.split('and').map((LastFirst) => {
-                        const lf = LastFirst.replace(/ /g, '').split(',')
-                        if (lf.length !== 2){
-                            output_authors.push(`${capitalize(authors)}`)
-                        } else {
-                            output_authors.push(`${capitalize(lf[0])}, ${lf[1].charAt(0).toUpperCase()}.`)
-                        }
-                    })
-                }
-                i+= 1
-            }
+        return given ? capitalize(given) : family && capitalize(family) || ''
+    })
 
-            title = title.trim()
-            venue = venue.trim()
-            volume = volume.trim()
-            number = number.trim()
-            pages = pages.trim()
-            year = year.trim()
-            publisher = publisher.trim()
-            howpublished = howpublished.trim()
-            note = note.trim()
-            authors = authors.trim()
+    bibtexs.map((bibtex) => {
+        const { id, title, author, issued } = bibtex
 
-            bibitem+= `\\bibitem{${code}}`
+        bibitem+= `\\bibitem{${id}}`
 
-            if (output_authors.length === 1){
-                bibitem+= `${output_authors[0]} ${title}. `
-            } else {
-                bibitem+= output_authors.slice(0,-1).join(', ') + ' & ' + output_authors.slice(-1)[0] + ` ${title}. `
-            }
-
-            if (venue.length > 0){
-                bibitem+= `{\\em ${venue.split(' ').map((_ => capitalize(_))).join(' ')}}.`
-               if (volume.length > 0) {
-                   bibitem+= ` \\textbf{${volume}}`
-               }
-               if (pages.length > 0) {
-                   bibitem+= number.length > 0 ? `, ${pages}` : ` pp. ${pages}`
-               }
-               if (year.length > 0) {
-                   bibitem+= ` (${year})`
-               }
-            }
-            if (publisher.length > 0 && venue.length < 1){
-                bibitem+= `(${publisher},${year})`
-            }
-            if (year.length > 0 && publisher.length < 1 && venue.length < 1){
-                bibitem+= ` (${year})`
-            }
-            if (howpublished.length > 1){
-                bibitem+= `, ${howpublished}`
-            }
-            if (note.length > 0) {
-                bibitem+= `, ${note}`
-            }
-            bibitem+= '\n'
+        const authors = getAuthors(author)
+        if (authors.length === 1){
+            bibitem+= `${authors[0]} ${title}. `
+        } else {
+            bibitem+= authors.slice(0,-1).join(', ') + ' & ' + authors.slice(-1)[0] + ` ${title}. `
         }
-    }
+
+        const journal = bibtex['container-title']
+        if (journal){
+            const {volume, page, issue} = bibtex
+
+            bibitem+= `{\\em ${journal.split(' ').map((_ => capitalize(_))).join(' ')}}.`
+
+            if (volume) {
+                bibitem+= ` \\textbf{${volume}}`
+            }
+            if (page) {
+                bibitem+= issue ? `, ${page}` : ` pp. ${page}`
+            }
+            if (issued && issued['date-parts'] && issued['date-parts'].length > 0) {
+                bibitem+= ` (${issued['date-parts'].toString()})`
+            }
+        }
+
+        const publisher = bibtex['publisher']
+        if (!journal && publisher){
+            bibitem+= (issued && issued['date-parts']) && `(${publisher},${issued['date-parts'].toString()})` || `(${publisher})`
+        }
+
+        if (issued && issued['date-parts'] && issued['date-parts'].length > 0 &&  !publisher && !journal){
+            bibitem+= ` (${issued['date-parts'].toString()})`
+        }
+
+        const url = bibtex['URL']
+        if (url && url !== publisher){
+            bibitem+= `, ${url}`
+        }
+
+        const note = bibtex['note']
+        if (note) {
+            bibitem+= `, ${note}`
+        }
+        bibitem+= '\n'
+    })
     return bibitem
 }
 

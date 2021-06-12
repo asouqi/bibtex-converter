@@ -44,6 +44,10 @@ export const Citation = () => {
           setInnerText('')
 
           const file = event.target.files[0]
+          if (file.size > 25431761){
+              setUploadError('siz_limit')
+              return
+          }
           // eslint-disable-next-line no-undef
           const fileReader = new FileReader()
 
@@ -143,7 +147,9 @@ export const Citation = () => {
               {uploadProgress === 100 && (
                   <span className="badge bg-success" style={{marginTop: '10px'}}>Uploaded</span>
               )}
-              {uploadError && (<span className="badge bg-danger" style={{marginTop: '25px'}}>Unable to upload your file ⚠</span>)}
+              {uploadError && (<span className="badge bg-danger" style={{marginTop: '25px'}}>
+                  {typeof uploadError === 'string' && 'File size should be lees then 24 MB ⚠' || 'Unable to upload your file ⚠'}
+              </span>)}
           </div>
 
           {/* Conversion Control */}

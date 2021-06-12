@@ -1,3 +1,9 @@
+@font-face {
+    font-family: "Alata";
+    src: local("Alata"),
+    url("./fonts/alata-v2-latin-regular.woff2") format("truetype");
+}
+
 .alata-font{
-    font-family: "Alata", serif;
+    font-family: 'Alata', sans-serif;
 }

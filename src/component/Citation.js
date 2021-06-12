@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState} from "react";
+import React, {Fragment, useCallback, useRef, useState} from "react";
 import {FormatGroup} from "./Format/FormatGroup";
 import {TextEditor} from "./TextEditor";
 import UseCite from '../hooks/cite'
@@ -6,6 +6,7 @@ import UseCite from '../hooks/cite'
 import {FormatLabel} from "./Format/FormatLabel";
 import {FormatEncoder} from "./Format/FormatEncoder";
 import {ConversionControls} from "./ConversionControls";
+import {CSL} from "../utilities/csl";
 
 export const Citation = () => {
   const editorRef = useRef()
@@ -167,28 +168,24 @@ export const Citation = () => {
           )}
           {outputError && (<span className="mb-2 badge bg-danger">sorry we are unable to convert your input ⚠️</span>)}
           <div>
-              <div className="h-100 bg-light">
+              {format !== 'XML' && format !== 'BIB' && format !== 'RIS' && <div className="h-100 bg-light">
                       <h6>Citation Style/Templates</h6>
-                      <div className="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-                          <input checked={style === 'apa'} type="checkbox" className="btn-check" id="apa" autoComplete="off"
-                                 onClick={handleOnStyleClick}/>
-                          <label className="btn btn-outline-primary" htmlFor="apa">apa</label>
-
-                          <input checked={style === 'harvard1'} type="checkbox" className="btn-check" id="harvard1" autoComplete="off"
-                                 onClick={handleOnStyleClick}/>
-                          <label className="btn btn-outline-primary" htmlFor="harvard1">harvard</label>
-
-                          <input checked={style === 'ieee'} type="checkbox" className="btn-check" id="ieee" autoComplete="off"
-                                 onClick={handleOnStyleClick}/>
-                          <label className="btn btn-outline-primary" htmlFor="ieee">ieee</label>
+                      <div className="btn-group d-flex flex-wrap" role="group" aria-label="Basic checkbox toggle button group">
+                          {Object.keys(CSL).map(csl => (
+                              <Fragment key={csl}>
+                                  <input checked={style === csl} type="checkbox" className="btn-check" id={csl} autoComplete="off"
+                                         onChange={handleOnStyleClick}/>
+                                  <label className="btn btn-outline-primary" htmlFor={csl}>{csl}</label>
+                              </Fragment>
+                          ))}
                       </div>
-              </div>
+              </div>}
               <div className="h-100 bg-light py-4">
                   <h6>Conversion Result</h6>
                   <div className="h-100 p-5 bg-light border rounded-3">
                       {(format === 'XML' || format === 'BIB' || format === 'RIS') ?
                       <textarea readOnly style={{background: '#f8f9fa', width: '100%', height: '500px', resize: 'none', border: 'none'}} value={outputText}/> :
-                      <div className={'output-viewer'} dangerouslySetInnerHTML={{ __html: outputText }} />
+                      <div className={'output-viewer'} dangerouslySetInnerHTML={{ __html: outputText }} style={{overflow: 'auto'}}/>
                       }
                   </div>
               </div>

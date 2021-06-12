@@ -45,10 +45,6 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(woff2)$/i,
-                type: 'asset/resource',
-            },
-            {
                 test: /\.json$/,
                 use: ['json-loader'],
                 type: 'javascript/auto'

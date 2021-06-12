@@ -2,7 +2,6 @@ import React from "react";
 import {NavBar} from './nav/NavBar'
 import {Citation} from "./component/Citation";
 import 'bootstrap/scss/bootstrap.scss'
-import './fonts/Alata-Regular.ttf';
 import './fonts.css'
 
 function App() {
@@ -21,7 +20,7 @@ function App() {
           <footer>
                   <div className="alata-font h-100 p-5 bg-light border rounded-3">
                       <h2>Description</h2>
-                      <p>This site converts a BibTex (*.json *.bib) file or text to a formatted Bibliography, with supports for apa harvard iee CSL style.</p>
+                      <p>This site converts a BibTex (*.json *.bib) file or text to a formatted Bibliography, with supports for apa harvard iee elsevier springer acm acs mla CSL style.</p>
                       <p>
                           When you have an error and there no idea what is about, you can check Wikipedia for further information on
                           &nbsp;<a href="http://en.wikipedia.org/wiki/BibTeX">BibTeX</a>,

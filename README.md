@@ -10,4 +10,4 @@
 > * BibTex to citation
 > * BibTex to ris 
 
-> With support for citation styles: APA, Harvard, IEEE
+> With support for citation styles: APA, Harvard, IEEE, ACM, MLA, Springer, Elsevier, ACS

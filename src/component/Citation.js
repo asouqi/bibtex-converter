@@ -7,6 +7,7 @@ import {FormatLabel} from "./Format/FormatLabel";
 import {FormatEncoder} from "./Format/FormatEncoder";
 import {ConversionControls} from "./ConversionControls";
 import {CSL} from "../utilities/csl";
+import {CustomStyle} from "./CustomStyle";
 
 export const Citation = () => {
   const editorRef = useRef()
@@ -169,7 +170,7 @@ export const Citation = () => {
           {outputError && (<span className="mb-2 badge bg-danger">sorry we are unable to convert your input ⚠️</span>)}
           <div>
               {format !== 'XML' && format !== 'BIB' && format !== 'RIS' && <div className="h-100 bg-light">
-                      <h6>Citation Style/Templates</h6>
+                      <h3>Citation Style/Templates</h3>
                       <div className="btn-group d-flex flex-wrap" role="group" aria-label="Basic checkbox toggle button group">
                           {Object.keys(CSL).map(csl => (
                               <Fragment key={csl}>
@@ -179,6 +180,7 @@ export const Citation = () => {
                               </Fragment>
                           ))}
                       </div>
+                      <CustomStyle style={style} handleOnStyleClick={handleOnStyleClick}/>
               </div>}
               <div className="h-100 bg-light py-4">
                   <h6>Conversion Result</h6>

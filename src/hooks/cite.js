@@ -18,10 +18,11 @@ export default (input, format, style) => {
 
             if (style !== 'apa' && style !== 'harvard'){
                 const cslPlugin = plugins.config.get('@csl')
-                cslPlugin.templates.add(style, CSL[style])
+                const csl =  CSL[style] && CSL[style] || localStorage.getItem(style)
+                cslPlugin.templates.add(style, csl)
             }
 
-            const cite = await Cite.async(input,{ format: 'string'})
+            const cite = Cite(input,{ format: 'string'})
             try {
                 switch (format){
                     case 'BIB': {

@@ -6,11 +6,11 @@ export const FormatGroup = ({setFormat, format}) => {
 
     return(
         <div className={'container-fluid py-1'}>
-            <h4 className="mb-5 text-body alata-font">
+            <h2 className="mb-5 text-body alata-font" style={{fontSize: '1.5em'}}>
                 Convert your Bibtex bibliography text or file instantly.
-            </h4>
+            </h2>
 
-            {!format && <h6 className="mb-2 alata-font">please select one of the following formats for conversion:</h6>}
+            {!format && <div className="mb-2 alata-font alata-font" style={{fontWeight: 'bold', lineHeight: '1.6'}}>please select one of the following formats for conversion:</div>}
             <div className="btn-group d-flex flex-wrap justify-content-between" role="group" aria-label="converted formats" style={{marginBottom: '10px'}}>
                 <input type="radio" className="btn-check" name="btnradio" id="PDF" autoComplete="off"
                        onClick={onGroupButtonClick}/>

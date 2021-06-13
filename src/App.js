@@ -19,8 +19,8 @@ function App() {
           {/* Footer */}
           <footer>
                   <div className="alata-font h-100 p-5 bg-light border rounded-3">
-                      <h2>Description</h2>
-                      <p>This site converts a BibTex (*.json *.bib) file or text to a formatted Bibliography, with supports for apa harvard iee elsevier springer acm acs mla CSL style.</p>
+                      <h3>Description</h3>
+                      <p>This site converts a BibTex (*.json *.bib) file or text to a formatted Bibliography, with supports for a wide range of CSL style: (APA, Harvard, IEEE, Elsevier, Springer, ACM, ACS, MLA), and if you want to add a CSL style outside of this set you could click on the <b>Add Custom Style</b> button then enter style name with CSL code, this will be stored on your browser local storage.</p>
                       <p>
                           When you have an error and there no idea what is about, you can check Wikipedia for further information on
                           &nbsp;<a href="http://en.wikipedia.org/wiki/BibTeX">BibTeX</a>,
@@ -33,17 +33,63 @@ function App() {
                           To look at different bibtex styles and how they look in the resulting Document
                           &nbsp;<a href={"https://verbosus.com/bibtex-style-examples.html"}>BibTeX Style Examples</a>
                       </p>
+                      <span>
+                          Examples of the supported citation styles, with a view for Inline citations and Bibliography:
+                          <ul>
+                              <li>
+                                  <a className={'bibtex-apa'} href={'https://csl.mendeley.com/styleInfo/?styleId=http%3A%2F%2Fwww.zotero.org%2Fstyles%2Fapa'}>
+                                      American Psychological Association APA
+                                  </a>
+                              </li>
+                              <li>
+                                  <a className={'bibtex-harvard'} href={'https://csl.mendeley.com/styleInfo/?styleId=http%3A%2F%2Fwww.zotero.org%2Fstyles%2Fharvard1'}>
+                                      Harvard
+                                  </a>
+                              </li>
+                              <li>
+                                  <a className={'bibtex-ieee'} href={'https://csl.mendeley.com/styleInfo/?styleId=http%3A%2F%2Fwww.zotero.org%2Fstyles%2Fieee'}>
+                                      Institute of Electrical and Electronics Engineers IEEE
+                                  </a>
+                              </li>
+                              <li>
+                                  <a className={'bibtex-springer'} href={'https://csl.mendeley.com/styleInfo/?styleId=http%3A%2F%2Fwww.zotero.org%2Fstyles%2Fspringer-basic-author-date-no-et-al'}>
+                                      Springer
+                                  </a>
+                              </li>
+                              <li>
+                                  <a className={'bibtex-elsevier'} href={'https://csl.mendeley.com/styleInfo/?styleId=http%3A%2F%2Fwww.zotero.org%2Fstyles%2Felsevier-with-titles'}>
+                                      Elsevier
+                                  </a>
+                              </li>
+                              <li>
+                                  <a className={'bibtex-acm'} href={'https://csl.mendeley.com/styleInfo/?styleId=http%3A%2F%2Fwww.zotero.org%2Fstyles%2Fassociation-for-computing-machinery'}>
+                                      Association for Computing Machinery APA
+                                  </a>
+                              </li>
+                              <li>
+                                  <a className={'bibtex-mla'} href={'https://csl.mendeley.com/styleInfo/?styleId=http%3A%2F%2Fwww.zotero.org%2Fstyles%2Fmodern-language-association'}>
+                                      Modern Language Association MLA
+                                  </a>
+                              </li>
+                              <li>
+                                  <a className={'bibtex-acs'} href={'https://csl.mendeley.com/styleInfo/?styleId=http%3A%2F%2Fwww.zotero.org%2Fstyles%2Famerican-chemical-society'}>
+                                      American Chemical Society ACS
+                                  </a>
+                              </li>
+                          </ul>
+                      {/*    Modern Language Association MLA*/}
+                      </span>
 
                       <p>Supported Formats:</p>
                       <ul>
-                          <li>bibtex to pdf</li>
-                          <li>bibtex to html</li>
-                          <li>bibtex to word</li>
-                          <li>bibtex to xml</li>
-                          <li>bibtex to plain text</li>
-                          <li>bibtex to bibitem</li>
-                          <li>bibtex to citation</li>
-                          <li>bibtex to ris</li>
+                          <li title={'bibtex-pdf'}>Pdf</li>
+                          <li title={'bibtex-html'}>Html</li>
+                          <li title={'bibtex-word'}>Word</li>
+                          <li title={'bibtex-xml'}>Xml</li>
+                          <li title={'bibtex-plain-text bibtex-text'}>Plain text</li>
+                          <li title={'bibtex-bibitem'}>Bibitem</li>
+                          <li title={'bibtex-citation'}>Citation</li>
+                          <li title={'bibtex-ris'}>Ris</li>
                       </ul>
                   </div>
           </footer>

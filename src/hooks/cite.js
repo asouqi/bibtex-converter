@@ -38,6 +38,11 @@ export default (input, format, style) => {
                   } else {
                       setOutputText(output)
                   }
+                  ga('send', {
+                      hitType: 'event',
+                      eventCategory: 'Output',
+                      eventAction: `To ${format}`,
+                  });
               }
           }
         } else {

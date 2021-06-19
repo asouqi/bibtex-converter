@@ -48,6 +48,10 @@ module.exports = {
                 test: /\.json$/,
                 use: ['json-loader'],
                 type: 'javascript/auto'
+            },
+            {
+                test: /\.worker\.js$/,
+                use: { loader: "worker-loader" },
             }
         ],
     },

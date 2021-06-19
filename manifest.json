@@ -1,11 +1,12 @@
 {
   "app.js": "autoapp.bundle.js",
   "jsPDF.js": "autojsPDF.bundle.js",
-  "citation-js.js": "autocitation-js.bundle.js",
   "120.bundle.js": "auto120.bundle.js",
   "856.bundle.js": "auto856.bundle.js",
   "513.bundle.js": "auto513.bundle.js",
+  "citation-js.bundle.worker.js": "autocitation-js.bundle.worker.js",
   "favicon.ico": "autofavicon.ico",
+  "bibtex.worker.bundle.worker.js": "autobibtex.worker.bundle.worker.js",
   "index.html": "autoindex.html",
   "robots.txt": "autorobots.txt",
   "googlhtml": "autogoogle86229b14d00bfabe.html"

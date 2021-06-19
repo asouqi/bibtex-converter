@@ -43,6 +43,7 @@ export const Citation = () => {
       try {
           //Clear text
           editorRef.current.value = ''
+          setUploadError(false)
           setInnerText('')
 
           const file = event.target.files[0]
@@ -162,11 +163,6 @@ export const Citation = () => {
          />
 
           {/*  Output Viewer  */}
-          {outputLoading && (
-              <div className="spinner-grow text-info" role="status">
-                  <span className="visually-hidden">Loading...</span>
-              </div>
-          )}
           {outputError && (<span className="mb-2 badge bg-danger">sorry we are unable to convert your input ⚠️</span>)}
           <div>
               {format !== 'XML' && format !== 'BIB' && format !== 'RIS' && <div className="h-100 bg-light">
@@ -185,10 +181,17 @@ export const Citation = () => {
               <div className="h-100 bg-light py-4">
                   <h6>Conversion Result</h6>
                   <div className="h-100 p-5 bg-light border rounded-3">
-                      {(format === 'XML' || format === 'BIB' || format === 'RIS') ?
-                      <textarea readOnly style={{background: '#f8f9fa', width: '100%', height: '500px', resize: 'none', border: 'none'}} value={outputText}/> :
-                      <div className={'output-viewer'} dangerouslySetInnerHTML={{ __html: outputText }} style={{overflow: 'auto'}}/>
-                      }
+                      {outputLoading && (
+                          <div className="d-flex align-items-center d-flex flex-wrap flex-column">
+                              <div className="spinner-grow text-info" role="status">
+                                  <span className="visually-hidden">Loading...</span>
+                              </div>
+                          </div>
+                      ) || (
+                          (format === 'XML' || format === 'BIB' || format === 'RIS') ?
+                              <textarea readOnly style={{background: '#f8f9fa', width: '100%', height: '500px', resize: 'none', border: 'none'}} value={outputText}/> :
+                              <div className={'output-viewer'} dangerouslySetInnerHTML={{ __html: outputText }} style={{overflow: 'auto'}}/>
+                      )}
                   </div>
               </div>
           </div>

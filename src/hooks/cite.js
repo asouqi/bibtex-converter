@@ -1,77 +1,46 @@
 import { useEffect, useState} from "react";
-import {ConvertToBibItem, ConvertToXML} from "../utilities/bib_converter";
+import {ConvertToXML} from "../utilities/bib_converter";
 import {xmlFormatter} from "../utilities/xml_formatter";
 import {CSL} from "../utilities/csl";
+import Worker from "./bibtex.worker";
 
 export default (input, format, style) => {
     const [outputText, setOutputText] = useState(undefined)
     const [outputError, setOutputError] = useState(false)
     const [outputLoading, setOutputLoading] = useState(false)
+    const worker = new Worker('./hooks/bibtex.worker.js')
 
     useEffect(() => {
-        if (input.length > 1){
-        (async () => {
-            await import(/* webpackChunkName: "citation-js" */'@citation-js/plugin-bibtex');
-            await import(/* webpackChunkName: "citation-js" */'@citation-js/plugin-ris');
-            await import(/* webpackChunkName: "citation-js" */'@citation-js/plugin-csl');
-            const {Cite, plugins} = await import(/* webpackChunkName: "citation-js" */'@citation-js/core');
+        if (input.length > 1 && format){
+          const csl =  CSL[style] && CSL[style] || localStorage.getItem(style)
 
-            if (style !== 'apa' && style !== 'harvard'){
-                const cslPlugin = plugins.config.get('@csl')
-                const csl =  CSL[style] && CSL[style] || localStorage.getItem(style)
-                cslPlugin.templates.add(style, csl)
-            }
+          worker.postMessage({input,format,style, csl})
+          setOutputLoading(true)
 
-            const cite = Cite(input,{ format: 'string'})
-            try {
-                switch (format){
-                    case 'BIB': {
-                        const jsonBibtex = JSON.parse(cite.format('data'))
-                        const bibitem = ConvertToBibItem(jsonBibtex)
-                        setOutputLoading(false)
-                        setOutputError(false)
-                        setOutputText(bibitem)
-                        break
-                    }
-                    case 'XML': {
-                        const jsonBibtex = JSON.parse(cite.format('data'))
-                        const xml = ConvertToXML(jsonBibtex)
-                        setOutputLoading(false)
-                        setOutputError(false)
-                        setOutputText(xmlFormatter(xml))
-                        break
-                    }
-                    case 'PDF':
-                    case 'TXT':
-                    case 'CIT':
-                    case 'RIS':
-                    case 'HTML':
-                    case 'WORD': {
-                        const output = cite.format(((format === 'RIS' && 'ris') || (format === 'CIT' && 'citation') || 'bibliography'), {
-                            format: (format === 'TXT' && 'text') || 'html',
-                            template: style,
-                            lang: 'en-US'
-                        })
-                        setOutputLoading(false)
-                        setOutputError(false)
-                        setOutputText(output)
-                        break
-                    }
-                    default: {
-                        break
-                    }
-                }
-            }catch (e) {
-                setOutputText('')
-                setOutputError(true)
-                setOutputLoading(false)
-            }
-        })().catch(() => {
-            setOutputText('')
-            setOutputError(true)
-            setOutputLoading(false)
-        });
-    } else {
+          worker.onerror = () => {
+              setOutputLoading(false)
+              setOutputError(true)
+              setOutputText('')
+          }
+
+          worker.onmessage = (e) => {
+              const {output, error} = e.data
+              if (error){
+                  setOutputLoading(false)
+                  setOutputError(true)
+                  setOutputText('')
+              } else {
+                  setOutputLoading(false)
+                  setOutputError(false)
+                  if (format === 'XML'){
+                      const xml = ConvertToXML(output)
+                      setOutputText(xmlFormatter(xml))
+                  } else {
+                      setOutputText(output)
+                  }
+              }
+          }
+        } else {
             setOutputText('')
             setOutputLoading(false)
             setOutputError(false)

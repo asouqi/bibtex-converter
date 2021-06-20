@@ -107,10 +107,8 @@ export const Citation = () => {
               link.download = `${fileName}.${FormatEncoder[format].name}`;
               link.click();
           }
-          ga('send', {
-              hitType: 'event',
-              eventCategory: 'Download',
-              eventAction: `To ${format}`,
+          window.gtag('event','click',{
+              download : format,
           });
       }
   },[format, outputText, fileName, innerText, outputError])
@@ -126,10 +124,8 @@ export const Citation = () => {
           (async () =>{ await navigator.clipboard.writeText(outputText)})()
           setTimeout(function(){
               toast.className = toast.className.replace("show", "");
-              ga('send', {
-                  hitType: 'event',
-                  eventCategory: 'Clipboard',
-                  eventAction: `To ${format}`,
+              window.gtag('event','click',{
+                  clipboard : format,
               });
           }, 3000);
       }

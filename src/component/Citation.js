@@ -1,13 +1,16 @@
-import React, {Fragment, useCallback, useRef, useState} from "react";
+import React, {Fragment, useCallback, useRef, useState, Suspense} from "react";
 import {FormatGroup} from "./Format/FormatGroup";
 import {TextEditor} from "./TextEditor";
 import UseCite from '../hooks/cite'
 
 import {FormatLabel} from "./Format/FormatLabel";
-import {FormatEncoder} from "./Format/FormatEncoder";
 import {ConversionControls} from "./ConversionControls";
 import {CSL} from "../utilities/csl";
 import {CustomStyle} from "./CustomStyle";
+const DocumentTextEditor = React.lazy(() => import(/* webpackChunkName: "ckeditor" */"./Ckeditor/DocumentTextEditor"));
+import {ButtonGroup, EditButton} from "./Buttons";
+import useClipboardClick from "../hooks/clipboard";
+import useDownloadClick from "../hooks/download";
 
 export const Citation = () => {
   const editorRef = useRef()
@@ -19,8 +22,11 @@ export const Citation = () => {
   const [uploadProgress, setUploadProgress] = useState(0)
   const [uploadError, setUploadError] = useState(false)
   const [fileName, setFileName] = useState('untitled')
+  const [edit, setEdit] = useState(false)
 
   const {outputText, outputError, outputLoading} = UseCite(innerText,format, style)
+  const onClipboardClick = useClipboardClick(outputText, outputError)
+  const onDownloadClick = useDownloadClick(format, outputText, fileName, outputError)
 
   const onTextChangeHandler = useCallback((event) => {
       if (uploadProgress !== 0 || uploadError){
@@ -66,73 +72,15 @@ export const Citation = () => {
       }
   },[])
 
-  const onDownloadClickHandler = useCallback(async (event) => {
-      if (format && innerText.length > 1 && !outputError){
-          if (format === 'PDF'){
-              const element = document.getElementsByClassName('output-viewer')[0].cloneNode(true);
-              element.style.width = '648px';
-              element.style.padding = '12px';
-
-              const style = `.csl-bib-body div:nth-child(10n){ margin-bottom: 300px; }`
-              const styleSheet = document.createElement('style')
-              styleSheet.innerText = style
-              element.appendChild(styleSheet)
-
-              const {jsPDF} = await import(/* webpackChunkName: "jsPDF" */'jspdf');
-              const doc = new jsPDF('p', 'px', 'a4')
-              doc.html(element, {
-                  callback: function (doc) {
-                      doc.setFontSize(12)
-                      doc.save(fileName);
-                  },
-                  html2canvas: {
-                      scale: 0.65
-                  },
-                  x: 25,
-                  y: 50,
-              })
-          } else {
-              const link = document.createElement('a');
-              if (format === 'WORD'){
-                  const header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' "+
-                      "xmlns:w='urn:schemas-microsoft-com:office:word' "+
-                      "xmlns='http://www.w3.org/TR/REC-html40'>"+
-                      "<head><meta charset='utf-8'></head><body>";
-                  const footer = "</body></html>";
-                  const source = header + outputText + footer
-                  link.href = `data:${FormatEncoder[format].fileType};charset=UTF-8,` + encodeURIComponent(source)
-              } else {
-                  link.href = `data:${FormatEncoder[format].fileType};charset=UTF-8,` + encodeURIComponent(outputText);
-              }
-              link.download = `${fileName}.${FormatEncoder[format].name}`;
-              link.click();
-          }
-          window.gtag('event','click',{
-              download : format,
-          });
-      }
-  },[format, outputText, fileName, innerText, outputError])
-
   const handleOnStyleClick = useCallback((event) => setStyle(event.target.id),[])
 
   const onFileNameChange = useCallback((event) => setFileName(event.target.value), [setFileName])
 
-  const onClipboardClick = useCallback((event) => {
-      if (outputText && outputText.length > 1 && !outputError) {
-          const toast = document.getElementById("snackbar");
-          toast.className = "show";
-          (async () =>{ await navigator.clipboard.writeText(outputText)})()
-          setTimeout(function(){
-              toast.className = toast.className.replace("show", "");
-              window.gtag('event','click',{
-                  clipboard : format,
-              });
-          }, 3000);
-      }
-  },[outputText, outputError])
+  const onEditClick = useCallback(() => setEdit(true),[setEdit])
 
   return(
-      <div className="container-fluid">
+      <>
+          {!edit && <div className="container-fluid">
           <FormatGroup format={format} setFormat={setFormat}/>
 
           {/* Text editor */}
@@ -162,7 +110,7 @@ export const Citation = () => {
           </div>
 
           {/* Conversion Control */}
-         <ConversionControls onDownloadClickHandler={onDownloadClickHandler}
+         <ConversionControls onDownloadClickHandler={onDownloadClick}
                              onClearClickHandler={onClearClickHandler}
                              onFileNameChange={onFileNameChange}
                              onClipboardClick={onClipboardClick}
@@ -194,13 +142,22 @@ export const Citation = () => {
                               </div>
                           </div>
                       ) || (
-                          (format === 'XML' || format === 'BIB' || format === 'RIS') ?
+                          <>
+                              {format && outputText.length > 1 && (format !== 'XML' && format !== 'BIB' && format !== 'RIS' && format !== 'TXT') && <ButtonGroup>
+                                  <EditButton onEditClick={onEditClick}/>
+                              </ButtonGroup>}
+                              {(format === 'XML' || format === 'BIB' || format === 'RIS') ?
                               <textarea readOnly style={{background: '#f8f9fa', width: '100%', height: '500px', resize: 'none', border: 'none'}} value={outputText}/> :
-                              <div className={'output-viewer'} dangerouslySetInnerHTML={{ __html: outputText }} style={{overflow: 'auto'}}/>
+                              <div className={'output-viewer'} dangerouslySetInnerHTML={{ __html: outputText }} style={{overflow: 'auto'}}/>}
+                          </>
                       )}
                   </div>
               </div>
           </div>
-      </div>
+      </div>}
+          {edit && <Suspense fallback={<div>111</div>}>
+              <DocumentTextEditor value={outputText} format={format} fileName={fileName} setEdit={setEdit}/>
+          </Suspense>}
+      </>
   )
 }

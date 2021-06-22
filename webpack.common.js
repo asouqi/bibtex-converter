@@ -52,7 +52,16 @@ module.exports = {
             {
                 test: /\.worker\.js$/,
                 use: { loader: "worker-loader" },
-            }
+            },
+            {
+                test: /\.(svg)$/,
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        name: 'files/[name].[ext]',
+                    },
+                },
+            },
         ],
     },
     resolve: {

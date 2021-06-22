@@ -1,7 +1,7 @@
 import React from "react";
 import {FormatEncoder} from "./FormatEncoder";
 
-export const FormatLabel = ({format, uploadMessage}) => (
+export const FormatLabel = ({format, uploadMessage,editorMessage}) => (
     <div className="col d-flex align-items-start py-3">
         <svg className="me-2" viewBox="0 0 24 24" fill="none" width={24} height={24} xmlns="http://www.w3.org/2000/svg">
             <path
@@ -14,7 +14,12 @@ export const FormatLabel = ({format, uploadMessage}) => (
             <path d="M12 11.5H17" stroke="white"/>
         </svg>
         <div>
-            {!uploadMessage && <h4 className="alata-font fw-bold mb-2">Enter your Bibtex for Converting to {FormatEncoder[format].text}</h4>}
-            {uploadMessage && <h4 className="alata-font fw-bold mb-2">Choose your .bib or .json file for converting to {FormatEncoder[format].text}</h4>}
+            {uploadMessage && (
+                <h4 className="alata-font fw-bold mb-2">Choose your .bib or .json file for converting to {FormatEncoder[format].text}</h4>
+            ) || editorMessage && (
+                <h4 className="alata-font fw-bold mb-2">Edit converted BibTex, before downloading {FormatEncoder[format].text} document</h4>
+            ) || (
+                <h4 className="alata-font fw-bold mb-2">Enter your Bibtex for Converting to {FormatEncoder[format].text}</h4>
+            )}
         </div>
     </div>)

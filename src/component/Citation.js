@@ -7,10 +7,12 @@ import {FormatLabel} from "./Format/FormatLabel";
 import {ConversionControls} from "./ConversionControls";
 import {CSL} from "../utilities/csl";
 import {CustomStyle} from "./CustomStyle";
-const DocumentTextEditor = React.lazy(() => import(/* webpackChunkName: "ckeditor" */"./Ckeditor/DocumentTextEditor"));
 import {ButtonGroup, EditButton} from "./Buttons";
 import useClipboardClick from "../hooks/clipboard";
 import useDownloadClick from "../hooks/download";
+import {BorderSpinner} from "./Spinners";
+const CodeViewer = React.lazy(() => import(/* webpackChunkName: "code-viewer" */"./CodeViewer"));
+const DocumentEditor = React.lazy(() => import(/* webpackChunkName: "ckeditor" */"./DocumentEditor"));
 
 export const Citation = () => {
   const editorRef = useRef()
@@ -76,7 +78,10 @@ export const Citation = () => {
 
   const onFileNameChange = useCallback((event) => setFileName(event.target.value), [setFileName])
 
-  const onEditClick = useCallback(() => setEdit(true),[setEdit])
+  const onEditClick = useCallback(() => {
+      setEdit(true)
+      window.scrollTo(0, 0)
+  },[setEdit])
 
   return(
       <>
@@ -143,11 +148,11 @@ export const Citation = () => {
                           </div>
                       ) || (
                           <>
-                              {format && outputText.length > 1 && (format !== 'XML' && format !== 'BIB' && format !== 'RIS' && format !== 'TXT') && <ButtonGroup>
+                              {format && outputText.length > 1 && (format !== 'XML' && format !== 'RIS' && format !== 'TXT') && <ButtonGroup>
                                   <EditButton onEditClick={onEditClick}/>
                               </ButtonGroup>}
                               {(format === 'XML' || format === 'BIB' || format === 'RIS') ?
-                              <textarea readOnly style={{background: '#f8f9fa', width: '100%', height: '500px', resize: 'none', border: 'none'}} value={outputText}/> :
+                                  <Suspense fallback={<BorderSpinner/>}><CodeViewer format={format} value={outputText}/></Suspense> :
                               <div className={'output-viewer'} dangerouslySetInnerHTML={{ __html: outputText }} style={{overflow: 'auto'}}/>}
                           </>
                       )}
@@ -155,8 +160,8 @@ export const Citation = () => {
               </div>
           </div>
       </div>}
-          {edit && <Suspense fallback={<div>111</div>}>
-              <DocumentTextEditor value={outputText} format={format} fileName={fileName} setEdit={setEdit}/>
+          {edit && <Suspense fallback={<BorderSpinner/>}>
+              <DocumentEditor value={outputText} format={format} fileName={fileName} setEdit={setEdit}/>
           </Suspense>}
       </>
   )

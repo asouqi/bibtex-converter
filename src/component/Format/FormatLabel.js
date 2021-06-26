@@ -17,7 +17,7 @@ export const FormatLabel = ({format, uploadMessage,editorMessage}) => (
             {uploadMessage && (
                 <h4 className="alata-font fw-bold mb-2">Choose your .bib or .json file for converting to {FormatEncoder[format].text}</h4>
             ) || editorMessage && (
-                <h4 className="alata-font fw-bold mb-2">Edit converted BibTex, before downloading {FormatEncoder[format].text} document</h4>
+                <h4 className="alata-font fw-bold mb-2">Edit converted BibTex, before downloading to {FormatEncoder[format].text} document</h4>
             ) || (
                 <h4 className="alata-font fw-bold mb-2">Enter your Bibtex for Converting to {FormatEncoder[format].text}</h4>
             )}

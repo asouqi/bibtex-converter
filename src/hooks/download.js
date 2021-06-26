@@ -3,7 +3,6 @@ import {FormatEncoder} from "../component/Format/FormatEncoder";
 
 export default (format, outputText, fileName, outputError) => {
    return useCallback(async () => {
-       console.log(outputText)
        if (format && outputText.length > 1 && !outputError){
            if (format === 'PDF'){
                const pdfMake = await import(/* webpackChunkName: "pdfmake" */'pdfmake/build/pdfmake');

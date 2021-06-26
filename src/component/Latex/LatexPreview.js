@@ -91,15 +91,15 @@ async function compile(latex, iframe) {
         const katex = doc.createElement('link')
         katex.type = 'text/css'
         katex.rel  = 'stylesheet'
-        katex.href = '/latex/css/katex.css'
+        katex.href = '/css/katex.css'
 
         const article = doc.createElement('link')
         article.type = 'text/css'
         article.rel  = 'stylesheet'
-        article.href = '/latex/css/article.css'
+        article.href = '/css/article.css'
 
         const base = doc.createElement('script')
-        base.src = '/latex/js/base.js'
+        base.src = '/js/base.js'
 
         latexDoc.head.appendChild(katex)
         latexDoc.head.appendChild(article)

@@ -91,6 +91,46 @@ function App() {
                           <li title={'bibtex-citation'}>Citation</li>
                           <li title={'bibtex-ris'}>Ris</li>
                       </ul>
+
+                      <h3>Edit Converted BibTeX.</h3>
+                      <p>One of the extra functions the site provides, editing converted BibTeX by clicking on the edit button located at the output box.</p>
+
+                      <div
+                          className="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                          <div className="col p-4 d-flex flex-column position-static">
+                              <div className="mb-1 text-muted">Pdf, Html, Word, Citation</div>
+                              <p className="card-text mb-auto">for those formats will open a rich text editor which you could edit and tweak the document before downloading it.</p>
+                          </div>
+                      </div>
+
+                      <div
+                          className="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                          <div className="col p-4 d-flex flex-column position-static">
+                              <div className="mb-1 text-muted">Bibitem</div>
+                              <p className="card-text mb-auto">for this format the site provides a latex editor with the ability to inspect latex by clicking on the preview button which will compile and generate an HTML document.</p>
+                          </div>
+                      </div>
+
+                      <div className={'d-flex flex-wrap justify-content-between'}>
+                          <div className="card border rounded" style={{width: '18rem',}}>
+                              <img src="/assets/document_editor.png" className="img-fluid card-img-top" alt="..."/>
+                              <div className="card-body d-flex align-items-end justify-content-center">
+                                  <h5 className="card-title">Rich text editor</h5>
+                              </div>
+                          </div>
+                          <div className="card border rounded" style={{width: '18rem'}}>
+                              <img src="/assets/latex_edit.png" className="img-fluid card-img-top" alt="..."/>
+                              <div className="card-body d-flex align-items-end justify-content-center">
+                                  <h5 className="card-title">Latex editor</h5>
+                              </div>
+                          </div>
+                          <div className="card" style={{width: '18rem'}}>
+                              <img src="/assets/latex_preview.png" className="img-fluid card-img-top" alt="..."/>
+                              <div className="card-body d-flex align-items-end justify-content-center">
+                                  <h5 className="card-title">Latex preview</h5>
+                              </div>
+                          </div>
+                      </div>
                   </div>
           </footer>
 
@@ -101,11 +141,3 @@ function App() {
 }
 
 export default App;
-// This site converts a list of references in a wide range of styles to BibTeX. Minimal requirements for input file:
-//Description
-//
-// This website allows you to convert a BibTex (*.bib) file to a nicely formatted PDF.
-// It will include the bibliography in a rudimentary LaTeX file, using pdflatex to generate
-// the output. It might come in handy, if you don't have a LaTeX environment or can't be bothered
-// to compile the file on your own right now. Just enter your BibTeX file below and click submit
-// to receive a PDF shortly.

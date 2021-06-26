@@ -18,7 +18,7 @@ export const ConvertToBibItem = (bibtexs) => {
         if (authors.length === 1){
             bibitem+= `${authors[0]} ${title}. `
         } else {
-            bibitem+= authors.slice(0,-1).join(', ') + ' & ' + authors.slice(-1)[0] + ` ${title}. `
+            bibitem+= authors.slice(0,-1).join(', ') + ' \& ' + authors.slice(-1)[0] + ` ${title}. `
         }
 
         const journal = bibtex['container-title']

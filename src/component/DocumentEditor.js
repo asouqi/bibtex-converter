@@ -13,8 +13,8 @@ export default ({value,format,fileName,setEdit}) => {
     const [latexDoc, setLatexDoc] = useState('')
 
     const onCancelClick = useCallback(() => setEdit(false),[setEdit])
-    const onClipboardClick = useClipboardClick(html, format,false)
-    const onDownloadClick = useDownloadClick(format, html, fileName, false)
+    const onClipboardClick = useClipboardClick(html, format,false,'editor-clipboard')
+    const onDownloadClick = useDownloadClick(format, html, fileName, false,'editor-download')
 
     return <BibTexContext.Provider value={{html,setHtml,latexDoc, setLatexDoc}}>
         <FormatLabel format={format} editorMessage={true}/>

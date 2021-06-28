@@ -1,7 +1,7 @@
 import {useCallback} from "react";
 import {FormatEncoder} from "../component/Format/FormatEncoder";
 
-export default (format, outputText, fileName, outputError) => {
+export default (format, outputText, fileName, outputError, event = 'download') => {
    return useCallback(async () => {
        if (format && outputText.length > 1 && !outputError){
            if (format === 'PDF'){
@@ -28,9 +28,7 @@ export default (format, outputText, fileName, outputError) => {
                link.download = `${fileName}.${FormatEncoder[format].name}`;
                link.click();
            }
-           window.gtag('event','click',{
-               download : format,
-           });
+           dataLayer.push({event, format})
        }
    },[format, outputText, fileName, outputError])
 

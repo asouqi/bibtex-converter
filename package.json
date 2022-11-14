@@ -9,7 +9,7 @@
     "@citation-js/plugin-csl": "^0.5.1",
     "@citation-js/plugin-ris": "^0.5.1",
     "@ckeditor/ckeditor5-build-decoupled-document": "23.0.0",
-    "@ckeditor/ckeditor5-react": "2.1.0",
+    "@ckeditor/ckeditor5-react": "^5.0.2",
     "@uiw/react-codemirror": "^3.0.10",
     "bootstrap": "^5.0.0",
     "html-to-pdfmake": "^2.2.4",

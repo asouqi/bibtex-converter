@@ -7,8 +7,10 @@ export const LatexEditor = () => {
 
     const [view,setView] = useState('edit')
 
-    const onViewClick = useCallback(() =>
-        setView(view === 'edit' ? 'preview' : 'edit'), [view,setView])
+    const onViewClick = useCallback(() => {
+        dataLayer.push({event: 'latex-preview'})
+        setView(view === 'edit' ? 'preview' : 'edit')
+    }, [view,setView])
 
     return <>
         <ButtonGroup>

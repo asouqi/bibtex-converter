@@ -38,9 +38,7 @@ export default (input, format, style) => {
                   } else {
                       setOutputText(output)
                   }
-                  window.gtag('event','click',{
-                      output : format,
-                  });
+                  dataLayer.push({event: 'convert', format})
               }
           }
         } else {

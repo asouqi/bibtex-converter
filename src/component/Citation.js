@@ -27,7 +27,7 @@ export const Citation = () => {
   const [edit, setEdit] = useState(false)
 
   const {outputText, outputError, outputLoading} = UseCite(innerText,format, style)
-  const onClipboardClick = useClipboardClick(outputText, outputError)
+  const onClipboardClick = useClipboardClick(outputText,format, outputError)
   const onDownloadClick = useDownloadClick(format, outputText, fileName, outputError)
 
   const onTextChangeHandler = useCallback((event) => {
@@ -81,7 +81,8 @@ export const Citation = () => {
   const onEditClick = useCallback(() => {
       setEdit(true)
       window.scrollTo(0, 0)
-  },[setEdit])
+      dataLayer.push({event: 'edit', format})
+  },[setEdit,format])
 
   return(
       <>

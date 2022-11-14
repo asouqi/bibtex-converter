@@ -13182,9 +13182,9 @@ svg.js@2.6.x:
   resolved "https://registry.yarnpkg.com/svg.js/-/svg.js-2.6.6.tgz#27e9ada6231d0d35ded2c5252f52f19101104ed8"
   integrity sha512-YdraDjga3Chc5Mxl9H8OhHdTBGyC/Sf2Bqv3ywpCQpHngfA2yq3vqf0SAdN+bAs1Iia6h9bi68dHNsqe8H/Apw==
 
-"svgdom@git+https://github.com/michael-brade/svgdom.git":
+"svgdom@https://github.com/michael-brade/svgdom":
   version "0.1.8"
-  resolved "git+https://github.com/michael-brade/svgdom.git#a9d2751e2f4527f7a2cd73534d293e63cc602f89"
+  resolved "https://github.com/michael-brade/svgdom#a9d2751e2f4527f7a2cd73534d293e63cc602f89"
   dependencies:
     fontkit "^1.8.1"
     image-size "^0.8.3"

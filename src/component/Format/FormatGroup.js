@@ -6,6 +6,7 @@ export const FormatGroup = ({setFormat, format}) => {
 
     return(
         <div className={'container-fluid py-1'}>
+            <AddBlock/>
             <h2 className="mb-5 text-body alata-font" style={{fontSize: '1.5em'}}>
                 Convert your Bibtex bibliography text or file instantly.
             </h2>
@@ -47,3 +48,18 @@ export const FormatGroup = ({setFormat, format}) => {
         </div>
     )
 }
+
+const AddBlock = () => <>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8835129466793937"
+            crossOrigin="anonymous"></script>
+    <!-- Header Add -->
+    <ins className="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-8835129466793937"
+         data-ad-slot="1631505271"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    <>

@@ -1,6 +1,5 @@
 import React, {useCallback} from "react";
 import {FormatButton} from "./FormatButton";
-import {Helmet} from "react-helmet";
 
 export const FormatGroup = ({setFormat, format}) => {
     const onGroupButtonClick = useCallback((event) => setFormat(event.target.id),[setFormat])
@@ -8,7 +7,7 @@ export const FormatGroup = ({setFormat, format}) => {
     return(
         <div className={'container-fluid py-1'}>
 
-            {/*<AddsBlock />*/}
+            <AddsBlock/>
 
             <h2 className="mb-5 text-body alata-font" style={{fontSize: '1.5em'}}>
                 Convert your Bibtex bibliography text or file instantly.
@@ -52,16 +51,17 @@ export const FormatGroup = ({setFormat, format}) => {
     )
 }
 
-// const AddsBlock = () => <Helmet>
-//     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8835129466793937"
-//             crossOrigin="anonymous"></script>
-//     <ins className="adsbygoogle"
-//          style="display:block"
-//          data-ad-client="ca-pub-8835129466793937"
-//          data-ad-slot="1631505271"
-//          data-ad-format="auto"
-//          data-full-width-responsive="true"></ins>
-//     <script>
-//         (adsbygoogle = window.adsbygoogle || []).push({});
-//     </script>
-// </Helmet>
+const AddsBlock = () => <>
+    <script type="application/ld+json"
+            async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8835129466793937"
+            crossOrigin="anonymous"/>
+    <ins className={'adsbygoogle'}
+         style={{display: 'block'}}
+         data-ad-client="ca-pub-8835129466793937"
+         data-ad-slot="1631505271"
+         data-ad-format="auto"
+         data-full-width-responsive="true"/>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</>

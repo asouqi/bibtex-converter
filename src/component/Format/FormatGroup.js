@@ -1,12 +1,15 @@
 import React, {useCallback} from "react";
 import {FormatButton} from "./FormatButton";
+import {Helmet} from "react-helmet";
 
 export const FormatGroup = ({setFormat, format}) => {
     const onGroupButtonClick = useCallback((event) => setFormat(event.target.id),[setFormat])
 
     return(
         <div className={'container-fluid py-1'}>
-            <AddBlock/>
+
+            <AddsBlock />
+
             <h2 className="mb-5 text-body alata-font" style={{fontSize: '1.5em'}}>
                 Convert your Bibtex bibliography text or file instantly.
             </h2>
@@ -49,10 +52,9 @@ export const FormatGroup = ({setFormat, format}) => {
     )
 }
 
-const AddBlock = () => <>
+const AddsBlock = () => <Helmet>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8835129466793937"
             crossOrigin="anonymous"></script>
-    <!-- Header Add -->
     <ins className="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-8835129466793937"
@@ -62,4 +64,4 @@ const AddBlock = () => <>
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
-    <>
+</Helmet>

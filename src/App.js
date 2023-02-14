@@ -80,6 +80,45 @@ function App() {
                       {/*    Modern Language Association MLA*/}
                       </span>
 
+                      <p>If You need a Free Citation Generator:</p>
+                      <ul>
+                          <li>
+                              <a className={'7 Apa Citation Generator'} href={'https://citation-creator.com/apa_7th/'}>
+                                  7 Apa Citation
+                              </a>
+                          </li>
+                          <li>
+                              <a className={'Mla Citation Generator'} href={'https://citation-creator.com/mla/'}>
+                                  Mla Citation
+                              </a>
+                          </li>
+                          <li>
+                              <a className={'8 Mla Citation Generator'} href={'https://citation-creator.com/mla_8/'}>
+                                  8 Apa Citation
+                              </a>
+                          </li>
+                          <li>
+                              <a className={'Harvard Citation Generator'} href={'https://citation-creator.com/harvard/'}>
+                                  Harvard Citation
+                              </a>
+                          </li>
+                          <li>
+                              <a className={'AMA Citation Generator'} href={'https://citation-creator.com/ama/'}>
+                                  AMA Citation
+                              </a>
+                          </li>
+                          <li>
+                              <a className={'Chicago Citation Generator'} href={'https://citation-creator.com/chicago/'}>
+                                  Chicago Citation
+                              </a>
+                          </li>
+                          <li>
+                              <a className={'ACS Citation Generator'} href={'https://citation-creator.com/acs/'}>
+                                  ACS Citation
+                              </a>
+                          </li>
+                      </ul>
+
                       <p>Supported Formats:</p>
                       <ul>
                           <li title={'bibtex-pdf'}>Pdf</li>

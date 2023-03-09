@@ -83,37 +83,37 @@ function App() {
                       <p>If You need a Free Citation Generator:</p>
                       <ul>
                           <li>
-                              <a className={'7 Apa Citation Generator'} href={'https://citation-creator.com/apa_7th/'}>
+                              <a className={'7 Apa Citation Generator'} href={'https://citationgenerators.com/apa_7th/'}>
                                   7 Apa Citation
                               </a>
                           </li>
                           <li>
-                              <a className={'Mla Citation Generator'} href={'https://citation-creator.com/mla/'}>
+                              <a className={'Mla Citation Generator'} href={'https://citationgenerators.com/mla/'}>
                                   Mla Citation
                               </a>
                           </li>
                           <li>
-                              <a className={'8 Mla Citation Generator'} href={'https://citation-creator.com/mla_8/'}>
+                              <a className={'8 Mla Citation Generator'} href={'https://citationgenerators.com/mla_8/'}>
                                   8 Apa Citation
                               </a>
                           </li>
                           <li>
-                              <a className={'Harvard Citation Generator'} href={'https://citation-creator.com/harvard/'}>
+                              <a className={'Harvard Citation Generator'} href={'https://citationgenerators.com/harvard/'}>
                                   Harvard Citation
                               </a>
                           </li>
                           <li>
-                              <a className={'AMA Citation Generator'} href={'https://citation-creator.com/ama/'}>
+                              <a className={'AMA Citation Generator'} href={'https://citationgenerators.com/ama/'}>
                                   AMA Citation
                               </a>
                           </li>
                           <li>
-                              <a className={'Chicago Citation Generator'} href={'https://citation-creator.com/chicago/'}>
+                              <a className={'Chicago Citation Generator'} href={'https://citationgenerators.com/chicago/'}>
                                   Chicago Citation
                               </a>
                           </li>
                           <li>
-                              <a className={'ACS Citation Generator'} href={'https://citation-creator.com/acs/'}>
+                              <a className={'ACS Citation Generator'} href={'https://citationgenerators.com/acs/'}>
                                   ACS Citation
                               </a>
                           </li>

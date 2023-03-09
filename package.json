@@ -28,7 +28,7 @@
   },
   "scripts": {
     "start": "webpack serve --open --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js",
+    "build": "export SET NODE_OPTIONS=--openssl-legacy-provider && webpack --config webpack.prod.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",

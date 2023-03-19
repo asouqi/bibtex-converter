@@ -38,7 +38,7 @@ function App() {
                           <ul>
                               <li>
                                   <a className={'bibtex-apa'} href={'https://csl.mendeley.com/styleInfo/?styleId=http%3A%2F%2Fwww.zotero.org%2Fstyles%2Fapa'}>
-                                      American Psychological Association APA
+                                      American Psychological Association (APA)
                                   </a>
                               </li>
                               <li>
@@ -48,7 +48,7 @@ function App() {
                               </li>
                               <li>
                                   <a className={'bibtex-ieee'} href={'https://csl.mendeley.com/styleInfo/?styleId=http%3A%2F%2Fwww.zotero.org%2Fstyles%2Fieee'}>
-                                      Institute of Electrical and Electronics Engineers IEEE
+                                      Institute of Electrical and Electronics Engineers (IEEE)
                                   </a>
                               </li>
                               <li>
@@ -63,17 +63,17 @@ function App() {
                               </li>
                               <li>
                                   <a className={'bibtex-acm'} href={'https://csl.mendeley.com/styleInfo/?styleId=http%3A%2F%2Fwww.zotero.org%2Fstyles%2Fassociation-for-computing-machinery'}>
-                                      Association for Computing Machinery APA
+                                      Association for Computing Machinery (ACM)
                                   </a>
                               </li>
                               <li>
                                   <a className={'bibtex-mla'} href={'https://csl.mendeley.com/styleInfo/?styleId=http%3A%2F%2Fwww.zotero.org%2Fstyles%2Fmodern-language-association'}>
-                                      Modern Language Association MLA
+                                      Modern Language Association (MLA)
                                   </a>
                               </li>
                               <li>
                                   <a className={'bibtex-acs'} href={'https://csl.mendeley.com/styleInfo/?styleId=http%3A%2F%2Fwww.zotero.org%2Fstyles%2Famerican-chemical-society'}>
-                                      American Chemical Society ACS
+                                      American Chemical Society (ACS)
                                   </a>
                               </li>
                           </ul>

@@ -8,8 +8,8 @@ export const LatexPreview = () => {
     const iframeRef = useRef()
     const {html} = useContext(BibTexContext)
 
-    useEffect(async () => {
-        await compile(html, iframeRef.current)
+    useEffect( () => {
+        compile(html, iframeRef.current)
     }, [])
 
     return <div className={'d-flex'}>

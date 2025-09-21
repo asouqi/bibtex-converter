@@ -12,6 +12,7 @@ export default ({format,value}) => {
         return <div className={'d-flex'} style={{width: '100%', height: '500px', marginTop: '4px'}}>
             <CodeMirror
                 value={value}
+                height={"500px"}
                 options={{
                     mode: code[format],
                     readOnly: true,

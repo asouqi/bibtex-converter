@@ -1,8 +1,8 @@
 import React from "react";
-import {NavBar} from './nav/NavBar'
+import {NavBar} from './nav/NavBar';
 import {Citation} from "./component/Citation";
-import 'bootstrap/scss/bootstrap.scss'
-import './fonts.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './fonts.css';
 
 function App() {
   return (

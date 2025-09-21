@@ -1,7 +1,7 @@
 import React, {useCallback, useContext} from 'react';
 import CodeMirror from '@uiw/react-codemirror';
-import 'codemirror/keymap/sublime';
-import 'codemirror/theme/monokai.css';
+import '@uiw/codemirror-theme-sublime';
+import '@uiw/codemirror-theme-monokai';
 import {BibTexContext} from "../DocumentEditor";
 
 export const LatexViewer = () => {

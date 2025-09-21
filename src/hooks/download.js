@@ -7,11 +7,11 @@ export default (format, outputText, fileName, outputError, event = 'download') =
            if (format === 'PDF'){
                const pdfMake = await import(/* webpackChunkName: "pdfmake" */'pdfmake/build/pdfmake');
                const pdfFonts = await import(/* webpackChunkName: "vfs_fonts" */'pdfmake/build/vfs_fonts');
-               pdfMake.vfs = pdfFonts.pdfMake.vfs;
+               pdfMake.addVirtualFileSystem(pdfFonts);
                const htmlToPdfmake = await import(/* webpackChunkName: "html-to-pdfmake" */'html-to-pdfmake');
 
                const pdfData = htmlToPdfmake.default(outputText)
-               pdfMake.createPdf({content: pdfData},null,null,pdfFonts.pdfMake.vfs).download(fileName)
+               pdfMake.createPdf({content: pdfData},null,null).download(fileName)
            } else {
                const link = document.createElement('a');
                if (format === 'WORD'){

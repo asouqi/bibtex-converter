@@ -3,7 +3,8 @@
 > Convert BibTex to one of the following formats:
 > * BibTex to pdf
 > * BibTex to html
-> * BibTex to word
+> * BibTex to word document
+> * BibTex to word bibliography xml
 > * BibTex to xml
 > * BibTex to plain text
 > * BibTex to bibitem

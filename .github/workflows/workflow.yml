@@ -3,7 +3,7 @@ name: Github Pages Deploy
 on:
   push:
     branches:
-      - "update_dependencies"
+      - "master"
 
 jobs:
   build:

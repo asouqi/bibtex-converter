@@ -2,8 +2,8 @@ import './style.css'
 import React, {useContext, useCallback} from 'react';
 import {toolbar, colors, fontSize} from "./CkeditorConfig";
 
-import CKEditor from "@ckeditor/ckeditor5-react";
-import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
+import {CKEditor} from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import {BibTexContext} from "../DocumentEditor";
 
 export default () => {
@@ -25,9 +25,10 @@ export default () => {
               toolbarContainer.appendChild( editor.ui.view.toolbar.element );
             }}
             onChange={onTextChange}
-            editor={ DecoupledEditor }
+            editor={ ClassicEditor }
             data={html}
             config={{
+              licenseKey: 'GPL',
               fontSize,
               fontColor: { colors },
               fontBackgroundColor: { colors },

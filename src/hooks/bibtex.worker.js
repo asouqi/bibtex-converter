@@ -28,6 +28,7 @@ async function convertBibtex(input, format, style, csl) {
             case 'WORD': {
                 return cite.format(((format === 'RIS' && 'ris') || (format === 'CIT' && 'citation') || 'bibliography'), {
                     format: (format === 'TXT' && 'text') || 'html',
+                    hyperlinks: true,
                     template: style,
                     lang: 'en-US'
                 })

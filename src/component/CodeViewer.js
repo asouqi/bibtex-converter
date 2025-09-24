@@ -4,6 +4,7 @@ import { EditorView } from '@codemirror/view';
 
 const code = {
     'XML': 'XML',
+    'WORD_XML': 'XML',
     'BIB': 'LaTex',
     'RIS': 'API',
 }

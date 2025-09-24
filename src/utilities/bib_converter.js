@@ -1,3 +1,5 @@
+import {transformBibTexToWordSource} from "./csl_word_transform";
+
 export const ConvertToBibItem = (bibtexs) => {
     let bibitem = ''
 
@@ -149,8 +151,30 @@ export const ConvertToXML = (bibtexs) => {
        return bibtex
     })
 
-    const xmlDoc = new XMLSerializer().serializeToString(bibliography.documentElement)
-    return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + xmlDoc
+    return new XMLSerializer().serializeToString(bibliography.documentElement)
+}
+
+export const convertToWordBibliographyXml = (bibtexJsonList) => {
+    const buildXml = (obj, tag) => {
+        if (Array.isArray(obj)){
+            return obj.map(item => buildXml(item, tag)).join("")
+        } else if (typeof obj === "object") {
+            return Object.entries(obj).map(([key, value]) => `<${key}>${buildXml(value, key)}</${key}>`).join("")
+        } else {
+            return obj || ""
+        }
+    }
+
+    const sources = bibtexJsonList.map(transformBibTexToWordSource)
+    const sourcesXml = sources.map((source) => `<b:Source>${buildXml(source)}</b:Source>`).join("\n")
+    return `
+      <b:Sources 
+    xmlns:b="http://schemas.openxmlformats.org/officeDocument/2006/bibliography"
+    xmlns="http://schemas.openxmlformats.org/officeDocument/2006/bibliography"
+    SelectedStyle="">
+    ${sourcesXml}
+    </b:Sources>
+    `
 }
 
 const encodeXML = (data) => {

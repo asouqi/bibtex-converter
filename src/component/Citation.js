@@ -149,10 +149,10 @@ export const Citation = () => {
                           </div>
                       ) || (
                           <>
-                              {format && outputText.length > 1 && (format !== 'XML' && format !== 'RIS' && format !== 'TXT') && <ButtonGroup>
+                              {format && outputText.length > 1 && (format !== 'XML' && format !== 'WORD_XML' && format !== 'RIS' && format !== 'TXT') && <ButtonGroup>
                                   <EditButton onEditClick={onEditClick}/>
                               </ButtonGroup>}
-                              {(format === 'XML' || format === 'BIB' || format === 'RIS') ?
+                              {(format === 'XML' || format === 'WORD_XML' || format === 'BIB' || format === 'RIS') ?
                                   <Suspense fallback={<BorderSpinner/>}><CodeViewer format={format} value={outputText}/></Suspense> :
                               <div className={'output-viewer'} dangerouslySetInnerHTML={{ __html: outputText }} style={{overflow: 'auto'}}/>}
                           </>

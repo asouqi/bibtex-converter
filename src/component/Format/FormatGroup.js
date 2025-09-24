@@ -1,5 +1,5 @@
 import React, {useCallback} from "react";
-import {FormatButton} from "./FormatButton";
+import {FormatButton, FormatButtonWithTip} from "./FormatButton";
 
 export const FormatGroup = ({setFormat, format}) => {
     const onGroupButtonClick = useCallback((event) => setFormat(event.target.id),[setFormat])
@@ -24,6 +24,10 @@ export const FormatGroup = ({setFormat, format}) => {
                 <input type="radio" className="btn-check" name="btnradio" id="WORD" autoComplete="off"
                        onClick={onGroupButtonClick}/>
                 <FormatButton format={'WORD'}/>
+
+                <input type="radio" className="btn-check" name="btnradio" id="WORD_XML" autoComplete="off"
+                       onClick={onGroupButtonClick}/>
+                <FormatButtonWithTip format={'WORD_XML'} message={'Bibliography with sources list converted form bibtex'}/>
 
                 <input type="radio" className="btn-check" name="btnradio" id="XML" autoComplete="off"
                        onClick={onGroupButtonClick}/>

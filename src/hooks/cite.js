@@ -1,5 +1,5 @@
 import { useEffect, useState} from "react";
-import {ConvertToXML} from "../utilities/bib_converter";
+import {convertToWordBibliographyXml, ConvertToXML} from "../utilities/bib_converter";
 import {xmlFormatter} from "../utilities/xml_formatter";
 import {CSL} from "../utilities/csl";
 import Worker from "./bibtex.worker";
@@ -32,9 +32,12 @@ export default (input, format, style) => {
               } else {
                   setOutputLoading(false)
                   setOutputError(false)
-                  if (format === 'XML'){
+                  if (format === 'XML') {
                       const xml = ConvertToXML(output)
-                      setOutputText(xmlFormatter(xml))
+                      setOutputText(xmlFormatter(xml, '<?xml version=\"1.0\" encoding=\"UTF-8\"?>'))
+                  } else if (format === 'WORD_XML') {
+                      const xml = convertToWordBibliographyXml(output)
+                      setOutputText(xmlFormatter(xml, '<?xml version="1.0" encoding="UTF-8" standalone="no"?>'))
                   } else {
                       setOutputText(output)
                   }

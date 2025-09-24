@@ -1,6 +1,7 @@
 import {ConvertToBibItem} from "../utilities/bib_converter";
 
 async function convertBibtex(input, format, style, csl) {
+    await import(/* webpackChunkName: "citation-js" */'@citation-js/plugin-bibjson');
     await import(/* webpackChunkName: "citation-js" */'@citation-js/plugin-bibtex');
     await import(/* webpackChunkName: "citation-js" */'@citation-js/plugin-ris');
     await import(/* webpackChunkName: "citation-js" */'@citation-js/plugin-csl');
@@ -17,6 +18,7 @@ async function convertBibtex(input, format, style, csl) {
                 const jsonBibtex = JSON.parse(cite.format('data'))
                 return ConvertToBibItem(jsonBibtex)
             }
+            case 'WORD_XML':
             case 'XML': {
                 return JSON.parse(cite.format('data'))
             }

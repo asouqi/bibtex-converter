@@ -5,6 +5,7 @@
   "homepage": "https://asouqi.github.io/bibtex-converter",
   "dependencies": {
     "@citation-js/core": "^0.7.18",
+    "@citation-js/plugin-bibjson": "^0.7.18",
     "@citation-js/plugin-bibtex": "^0.7.18",
     "@citation-js/plugin-csl": "^0.7.18",
     "@citation-js/plugin-ris": "^0.7.18",

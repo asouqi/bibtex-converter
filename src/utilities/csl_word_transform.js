@@ -101,7 +101,7 @@ const contributorSet = new Set(['author', 'editor', 'translator'])
 
 export const transformBibTexToWordSource = (bibTex) => {
     const source = {}
-    console.log(bibTex)
+
     for(const [key, mapping] of Object.entries(bibTexWordMapping)) {
         if (bibTex[key] !== undefined) {
             if (contributorSet.has(key)) {

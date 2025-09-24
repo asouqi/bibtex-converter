@@ -20,6 +20,12 @@ export const FormatEncoder = {
         name: 'docx',
         cite: 'bibliography',
     },
+    WORD_XML: {
+        color: '#2563eb',
+        text: 'Word Xml',
+        fileType: 'application/xml',
+        name: 'word bibliography xml',
+    },
     XML: {
         color: '#00CC44',
         text: 'Xml',

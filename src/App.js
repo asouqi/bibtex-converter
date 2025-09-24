@@ -123,7 +123,8 @@ function App() {
                       <ul>
                           <li title={'bibtex-pdf'}>Pdf</li>
                           <li title={'bibtex-html'}>Html</li>
-                          <li title={'bibtex-word'}>Word</li>
+                          <li title={'bibtex-word'}>Word Document</li>
+                          <li title={'bibtex-word-bibliography-xml'}>Word Bibliography Xml(that can be imported to source manager)</li>
                           <li title={'bibtex-xml'}>Xml</li>
                           <li title={'bibtex-plain-text bibtex-text'}>Plain text</li>
                           <li title={'bibtex-bibitem'}>Bibitem</li>

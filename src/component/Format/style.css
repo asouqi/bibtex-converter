@@ -22,6 +22,12 @@
     color: white;
 }
 
+.WORD_XML:hover {
+    cursor: pointer;
+    background: #2563eb;
+    color: white;
+}
+
 .XML:hover {
     cursor: pointer;
     background: #00CC44;

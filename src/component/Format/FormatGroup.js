@@ -25,6 +25,10 @@ export const FormatGroup = ({setFormat, format}) => {
                        onClick={onGroupButtonClick}/>
                 <FormatButton format={'WORD'}/>
 
+                <input type="radio" className="btn-check" name="btnradio" id="WORD_XML" autoComplete="off"
+                       onClick={onGroupButtonClick}/>
+                <FormatButton format={'WORD_XML'}/>
+
                 <input type="radio" className="btn-check" name="btnradio" id="XML" autoComplete="off"
                        onClick={onGroupButtonClick}/>
                 <FormatButton format={'XML'}/>
